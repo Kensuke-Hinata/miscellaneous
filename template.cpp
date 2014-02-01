@@ -21,6 +21,7 @@ using namespace std;
 #define INF32 (1 << 30)
 #define INF64 (1LL << 60)
 #define PB push_back
+#define MP make_pair
 #define CLR(v) ((v).clear())
 #define ALL(v) (v).begin(), (v).end()
 #define ZERO(v) memset(v, 0, sizeof(v))

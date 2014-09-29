@@ -6,9 +6,9 @@ class Hash
         this(int n)
         {
             len = n << 3;
-            h = new int[][len];
-            f = new bool[len];
-            v = new long[len];
+            h = new int[][len];   // list for the same value v
+            f = new bool[len];    // occupation flag
+            v = new long[len];    // value
         }
         int getPosition(long n)
         {

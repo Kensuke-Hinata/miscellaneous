@@ -1,4 +1,4 @@
-Algorithm-Competition-Template
+programming competition
 ==============================
 
 for convenience

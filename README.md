@@ -1,4 +1,4 @@
 programming competition
 ==============================
 
-for convenience
+just for fun

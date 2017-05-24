@@ -14,8 +14,8 @@ class SegmentTree(T)
 
         this(int leftIndex, int rightIndex)
         {
-            this.maximum = -(1 << 30);
-            this.minimum = 1 << 30;
+            this.maximum = -T.max;
+            this.minimum = T.max;
             this.leftIndex = leftIndex;
             this.rightIndex = rightIndex;
             this.left = this.right = null;
@@ -27,7 +27,6 @@ class SegmentTree(T)
 
     this(T[] arr)
     {
-        writeln(this.bound);
         this.initializeTree(this.root, arr, 0, cast(int)arr.length - 1);
     }
 
@@ -54,7 +53,7 @@ class SegmentTree(T)
         }
         if (left > node.rightIndex || right < node.leftIndex)
         {
-            return -(1 << 30);
+            return -T.max;
         }
         auto leftMax = _queryMax(node.left, left, right);
         auto rightMax = _queryMax(node.right, left, right);
@@ -74,7 +73,7 @@ class SegmentTree(T)
         }
         if (left > node.rightIndex || right < node.leftIndex)
         {
-            return 1 << 30;
+            return T.max;
         }
         auto leftMin = _queryMin(node.left, left, right);
         auto rightMin = _queryMin(node.right, left, right);

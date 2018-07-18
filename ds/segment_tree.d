@@ -86,12 +86,6 @@ class SegmentTree(T)
     }
 }
 
-unittest
-{
-    auto st0 = new SegmentTree!int([0]);
-    auto st1 = new SegmentTree!long([0]);
-}
-
 int main(string[] args)
 {
     return 0;

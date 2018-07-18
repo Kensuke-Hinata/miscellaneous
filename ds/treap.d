@@ -50,7 +50,6 @@ class Treap(T)
 
     protected void leftRotate(ref Node node)
     {
-        if (!node.right) return;
         auto rightNode = node.right;
         if (rightNode)
         {
@@ -62,7 +61,6 @@ class Treap(T)
 
     protected void rightRotate(ref Node node)
     {
-        if (!node.left) return;
         auto leftNode = node.left;
         if (leftNode)
         {

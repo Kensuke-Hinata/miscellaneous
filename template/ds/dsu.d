@@ -1,6 +1,6 @@
 import std.stdio, std.string, std.conv;
 
-class UnionSet
+class DSU
 {
     public:
         this(int n)

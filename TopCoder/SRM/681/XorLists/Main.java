@@ -54,9 +54,7 @@ public class Main {
             if (ret.size() > bn) return 0;
             if (ret.size() < bn) {
                 int rn = ret.size();
-                for (int j = 0; j < bn - rn; ++ j) {
-                    ret.add(0);
-                }
+                for (int j = 0; j < bn - rn; ++ j) ret.add(0);
             }
             Collections.reverse(ret);
             xorBits[i / n][i % n] = ret;
@@ -103,9 +101,7 @@ public class Main {
             }
         }
         allc = new ArrayList<Integer>();
-        for (int i = 0; i < (1 << n); ++ i) {
-            allc.add(i);
-        }
+        for (int i = 0; i < (1 << n); ++ i) allc.add(i);
         dp = new int[bn + 1][1 << n];
         for (int i = 0; i < bn + 1; ++ i) Arrays.fill(dp[i], -1);
         return recur(0, 0);

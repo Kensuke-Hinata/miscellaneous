@@ -71,7 +71,7 @@ public class Main {
             for (int j = 0; j < (1 << n); ++ j) {
                 ok[i][j] = true;
                 for (int k = 0; k < n; ++ k) {
-                    for (int t = k + 1; t < n; ++ t) {
+                    for (int t = 0; t < n; ++ t) {
                         int b0 = (j & (1 << k)) >> k;
                         int b1 = (j & (1 << t)) >> t;
                         if (!xorBits[k][t].get(i).equals(b0 ^ b1)) {

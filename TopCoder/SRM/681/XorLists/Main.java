@@ -59,12 +59,23 @@ public class Main {
             Collections.reverse(ret);
             xorBits[i / n][i % n] = ret;
         }
+        for (int i = 0; i < n; ++ i) {
+            for (int j = 0; j < bn; ++ j) {
+                if (!xorBits[i][i].get(j).equals(0)) return 0;
+            }
+            for (int j = i + 1; j < n; ++ j) {
+                for (int k = 0; k < bn; ++ k) {
+                    if (!xorBits[i][j].get(k).equals(
+                                xorBits[j][i].get(k))) return 0;
+                }
+            }
+        }
         ok = new boolean[mbits.size()][1 << n];
         for (int i = 0; i < bn; ++ i) {
             for (int j = 0; j < (1 << n); ++ j) {
                 ok[i][j] = true;
                 for (int k = 0; k < n; ++ k) {
-                    for (int t = 0; t < n; ++ t) {
+                    for (int t = k + 1; t < n; ++ t) {
                         int b0 = (j & (1 << k)) >> k;
                         int b1 = (j & (1 << t)) >> t;
                         if (!xorBits[k][t].get(i).equals(b0 ^ b1)) {

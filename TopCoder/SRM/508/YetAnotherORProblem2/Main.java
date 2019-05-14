@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class YetAnotherORProblem2 {
+public class Main {
     int recur(int mask, int idx, int N, int[][] dp, ArrayList<Integer>[] c) {
         if (dp[mask][idx] != -1) return dp[mask][idx];
         if (idx == N) {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public class YetAnotherORProblem
+public class Main 
 {
     List<int> toBinary(long num)
     {

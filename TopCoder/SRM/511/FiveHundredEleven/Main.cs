@@ -1,6 +1,6 @@
 using System;
 
-public class FiveHundredEleven
+public class Main
 {
     int recur(int mask, int steps, int[,] dp, int[] cards)
     {

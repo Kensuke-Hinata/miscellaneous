@@ -1,18 +1,4 @@
-#include <sstream>
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <map>
-#include <set>
-#include <string>
-#include <list>
-
-#include <cstring>
-#include <cctype>
-#include <cstdlib>
-#include <cstdio>
-#include <cmath>
-#include <ctime>
+#include <bits/stdc++.h>
 
 using namespace std;
 

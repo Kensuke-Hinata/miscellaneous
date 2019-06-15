@@ -2,13 +2,7 @@ import std.stdio, std.string;
 import std.typecons;
 import std.algorithm;
 
-struct XD
-{
-    int c;
-    int d;
-}
-
-long saiki(int idx, int rem, long[][] dp, XD[][] b)
+long saiki(int idx, int rem, long[][] dp, Tuple!(int, int)[][] b)
 {
     auto res = dp[idx][rem];
     if (res != -1) return res;
@@ -23,8 +17,8 @@ long saiki(int idx, int rem, long[][] dp, XD[][] b)
     auto three = -1;
     foreach (i; 0 .. b[idx].length)
     {
-        auto d = b[idx][i].d;
-        if (b[idx][i].c == 1)
+        auto d = b[idx][i][1];
+        if (b[idx][i][0] == 1)
         {
             foreach (j; 0 .. 3)
             {
@@ -36,7 +30,7 @@ long saiki(int idx, int rem, long[][] dp, XD[][] b)
                 }
             }
         }
-        else if (b[idx][i].c == 2)
+        else if (b[idx][i][0] == 2)
         {
             if (d > two) two = d;
         }
@@ -86,7 +80,7 @@ long saiki(int idx, int rem, long[][] dp, XD[][] b)
     return res;
 }
 
-void solve(XD[][] b)
+void solve(Tuple!(int, int)[][] b)
 {
     auto n = cast(int)b.length;
     auto dp = new long[][](n + 1, 10);
@@ -100,13 +94,13 @@ int main(string[] args)
     int n;
     while (readf("%d\n", &n) == 1)
     {
-        auto b = new XD[][n];
+        auto b = new Tuple!(int, int)[][n];
         foreach (i; 0 .. n)
         {
             int k;
             readf("%d\n", &k);
-            b[i] = new XD[k];
-            foreach (j; 0 .. k) readf("%d %d\n", &b[i][j].c, &b[i][j].d);
+            b[i] = new Tuple!(int, int)[k];
+            foreach (j; 0 .. k) readf("%d %d\n", &b[i][j][0], &b[i][j][1]);
         }
         solve(b);
     }

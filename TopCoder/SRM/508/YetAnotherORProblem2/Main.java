@@ -52,7 +52,7 @@ public class Main {
         while (scanner.hasNext()) {
             int N = scanner.nextInt();
             int R = scanner.nextInt();
-            System.out.println(new YetAnotherORProblem2().countSequences(N, R));
+            System.out.println(new Main().countSequences(N, R));
         }
         scanner.close();
     }

@@ -99,10 +99,7 @@ class Treap(T)
     public void insert(T val)
     {
         auto ret = _insert(root, val);
-        if (ret)
-        {
-            ++ _size;
-        }
+        if (ret) ++ _size;
     }
 
     protected bool _insert(ref Node node, T val)
@@ -123,14 +120,8 @@ class Treap(T)
             res = _insert(node.left, val);
             if (res)
             {
-                if (node.left.priority > node.priority)
-                {
-                    rightRotate(node);
-                }
-                else
-                {
-                    ++ node.size;
-                }
+                if (node.left.priority > node.priority) rightRotate(node);
+                else ++ node.size;
             }
         }
         else if (ret == -1)
@@ -138,14 +129,8 @@ class Treap(T)
             res = _insert(node.right, val);
             if (res)
             {
-                if (node.right.priority > node.priority)
-                {
-                    leftRotate(node);
-                }
-                else
-                {
-                    ++ node.size;
-                }
+                if (node.right.priority > node.priority) leftRotate(node);
+                else ++ node.size;
             }
         }
         return res;
@@ -154,24 +139,15 @@ class Treap(T)
     public void remove(T val)
     {
         auto ret = _remove(root, val);
-        if (ret)
-        {
-            -- _size;
-        }
+        if (ret) -- _size;
     }
 
     protected bool _remove(ref Node node, T val)
     {
         if (!node) return false;
         auto ret = node.cmpVal(val);
-        if (ret == -1)
-        {
-            return _remove(node.right, val);
-        }
-        else if (ret == 1)
-        {
-            return _remove(node.left, val);
-        }
+        if (ret == -1) return _remove(node.right, val);
+        else if (ret == 1) return _remove(node.left, val);
         if (!node.left && !node.right)
         {
             node = null;
@@ -198,10 +174,7 @@ class Treap(T)
             leftRotate(node);
             res = _remove(node.left, val);
         }
-        if (res)
-        {
-            -- node.size;
-        }
+        if (res) -- node.size;
         return res;
     }
 
@@ -210,20 +183,14 @@ class Treap(T)
         if (!node) return 0;
         if (node.val == val)
         {
-            if (node.left)
-            {
-                return node.left.size;
-            }
+            if (node.left) return node.left.size;
             return 0;
         }
         if (node.val < val)
         {
             auto res = _countLess(node.right, val);
             ++ res;
-            if (node.left)
-            {
-                res += node.left.size;
-            }
+            if (node.left) res += node.left.size;
             return res;
         }
         return _countLess(node.left, val);
@@ -239,20 +206,14 @@ class Treap(T)
         if (!node) return 0;
         if (node.val == val)
         {
-            if (node.right)
-            {
-                return node.right.size;
-            }
+            if (node.right) return node.right.size;
             return 0;
         }
         if (node.val > val)
         {
             auto res = _countGreater(node.left, val);
             ++ res;
-            if (node.right)
-            {
-                res += node.right.size;
-            }
+            if (node.right) res += node.right.size;
             return res;
         }
         return _countGreater(node.right, val);

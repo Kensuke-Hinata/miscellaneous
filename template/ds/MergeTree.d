@@ -42,23 +42,11 @@ class MergeTree(T)
         auto i = 0, j = 0, idx = 0;
         while (i <= mid - leftIndex && j < rightIndex - mid)
         {
-            if (node.left.arr[i] < node.right.arr[j])
-            {
-                node.arr[idx ++] = node.left.arr[i ++];
-            }
-            else
-            {
-                node.arr[idx ++] = node.right.arr[j ++];
-            }
+            if (node.left.arr[i] < node.right.arr[j]) node.arr[idx ++] = node.left.arr[i ++];
+            else node.arr[idx ++] = node.right.arr[j ++];
         }
-        while (i <= mid - leftIndex)
-        {
-            node.arr[idx ++] = node.left.arr[i ++];
-        }
-        while (j < rightIndex - mid)
-        {
-            node.arr[idx ++] = node.right.arr[j ++];
-        }
+        while (i <= mid - leftIndex) node.arr[idx ++] = node.left.arr[i ++];
+        while (j < rightIndex - mid) node.arr[idx ++] = node.right.arr[j ++];
     }
 }
 

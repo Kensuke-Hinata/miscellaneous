@@ -47,14 +47,8 @@ class SegmentTree(T)
 
     protected T _queryMax(Node node, int left, int right)
     {
-        if (left <= node.leftIndex && right >= node.rightIndex)
-        {
-            return node.maximum;
-        }
-        if (left > node.rightIndex || right < node.leftIndex)
-        {
-            return -T.max;
-        }
+        if (left <= node.leftIndex && right >= node.rightIndex) return node.maximum;
+        if (left > node.rightIndex || right < node.leftIndex) return -T.max;
         auto leftMax = _queryMax(node.left, left, right);
         auto rightMax = _queryMax(node.right, left, right);
         return max(leftMax, rightMax);
@@ -67,14 +61,8 @@ class SegmentTree(T)
 
     protected T _queryMin(Node node, int left, int right)
     {
-        if (left <= node.leftIndex && right >= node.rightIndex)
-        {
-            return node.minimum;
-        }
-        if (left > node.rightIndex || right < node.leftIndex)
-        {
-            return T.max;
-        }
+        if (left <= node.leftIndex && right >= node.rightIndex) return node.minimum;
+        if (left > node.rightIndex || right < node.leftIndex) return T.max;
         auto leftMin = _queryMin(node.left, left, right);
         auto rightMin = _queryMin(node.right, left, right);
         return min(leftMin, rightMin);

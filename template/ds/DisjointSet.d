@@ -19,10 +19,7 @@ class DisjointSet
 
         int find(int n)
         {
-            if (p[n] == n)
-            {
-                return n;
-            }
+            if (p[n] == n) return n;
             p[n] = find(p[n]);
             return p[n];
         }
@@ -37,10 +34,7 @@ class DisjointSet
             else
             {
                 p[pn] = pm;
-                if (h[pn] == h[pm])
-                {
-                    ++ h[pm];
-                }
+                if (h[pn] == h[pm]) ++ h[pm];
             }
         }
 };

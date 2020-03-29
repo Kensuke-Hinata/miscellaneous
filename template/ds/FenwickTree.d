@@ -10,10 +10,7 @@ class FenwickTree
         {
             auto n = cast(int)a.length;
             sum = new long[n + 1];
-            foreach (i; 1 .. n + 1)
-            {
-                add(i, a[i - 1]);
-            }
+            foreach (i; 1 .. n + 1) add(i, a[i - 1]);
         }
 
         static long lowbit(long x)

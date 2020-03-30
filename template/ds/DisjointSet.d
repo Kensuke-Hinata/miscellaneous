@@ -1,4 +1,5 @@
 import std.stdio, std.string, std.conv;
+import std.algorithm;
 
 class DisjointSet
 {
@@ -27,15 +28,9 @@ class DisjointSet
         void join(int n, int m)
         {
             int pn = find(n), pm = find(m);
-            if (h[pn] > h[pm])
-            {
-                p[pm] = pn;
-            }
-            else
-            {
-                p[pn] = pm;
-                if (h[pn] == h[pm]) ++ h[pm];
-            }
+            if (h[pn] > h[pm]) swap(pn, pm);
+            p[pn] = pm;
+            if (h[pn] == h[pm]) ++ h[pm];
         }
 };
 

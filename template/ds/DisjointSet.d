@@ -4,7 +4,8 @@ import std.algorithm;
 class DisjointSet
 {
     protected:
-        int[] p, h;
+        int[] p;
+        int[] h;
 
     public:
         this(int n)

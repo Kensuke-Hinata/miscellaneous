@@ -4,34 +4,34 @@ import std.algorithm;
 class DisjointSet
 {
     protected:
-        int[] p;
-        int[] h;
+        int[] parent;
+        int[] height;
 
     public:
         this(int n)
         {
-            p = new int[n];
-            h = new int[n];
+            parent = new int[n];
+            height = new int[n];
             foreach (i; 0 .. n)
             {
-                p[i] = i;
-                h[i] = 1;
+                parent[i] = i;
+                height[i] = 1;
             }
         }
 
         int find(int n)
         {
-            if (p[n] == n) return n;
-            p[n] = find(p[n]);
-            return p[n];
+            if (parent[n] == n) return n;
+            parent[n] = find(parent[n]);
+            return parent[n];
         }
 
         void join(int n, int m)
         {
             int pn = find(n), pm = find(m);
-            if (h[pn] > h[pm]) swap(pn, pm);
-            p[pn] = pm;
-            if (h[pn] == h[pm]) ++ h[pm];
+            if (height[pn] > height[pm]) swap(pn, pm);
+            parent[pn] = pm;
+            if (height[pn] == height[pm]) ++ height[pm];
         }
 };
 

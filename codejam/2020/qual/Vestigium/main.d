@@ -4,10 +4,10 @@ import std.algorithm, std.typecons;
 Tuple!(int, int, int) solve(int[][] mat)
 {
     auto n = mat.length;
-    auto f = new bool[n + 1];
     auto s = 0;
     foreach (i; 0 .. n) s += mat[i][i];
     auto r = 0, c = 0;
+    auto f = new bool[n + 1];
     foreach (i; 0 .. n)
     {
         foreach (j; 0 .. n)

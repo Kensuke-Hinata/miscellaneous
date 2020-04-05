@@ -7,20 +7,20 @@ int recur(int li, int ri, int d, int[][][] dp, ref string s)
     if (li == ri)
     {
         if (d <= s[li] - '0') dp[li][ri][d] = (s[li] - '0' - d) << 1;
-        else dp[li][ri][d] = 1 << 29;
+        else dp[li][ri][d] = int.max >> 2;
         return dp[li][ri][d];
     }
-    auto res = 1 << 29;
+    auto res = int.max >> 2;
     if (d < 9)
     {
         auto ret = recur(li, ri, d + 1, dp, s);
-        if (ret != 1 << 29) res = min(res, ret + 2);
+        if (ret != int.max >> 2) res = min(res, ret + 2);
     }
     foreach (i; li .. ri)
     {
         auto ret0 = recur(li, i, d, dp, s);
         auto ret1 = recur(i + 1, ri, d, dp, s);
-        if (ret0 != 1 << 29 && ret1 != 1 << 29) res = min(res, ret0 + ret1);
+        if (ret0 != int.max >> 2 && ret1 != int.max >> 2) res = min(res, ret0 + ret1);
     }
     dp[li][ri][d] = res;
     return res;

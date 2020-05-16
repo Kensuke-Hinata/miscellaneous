@@ -37,7 +37,7 @@ class SelfDescFind {
                 if (ret == 1LL << 60) return;
                 auto rs = ret == 0 ? "" : to_string(ret);
                 if (zflag) rs = "10" + rs;
-                if (ans.length() == 0 || (zflag && ans.substr(0, 2) == "10")) {
+                if (ans == "" || (zflag && ans.substr(0, 2) == "10")) {
                     ans = rs;
                 } else {
                     for (int i = 0; i < (SZ(d) << 1); ++ i) {

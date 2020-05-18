@@ -65,8 +65,7 @@ public class Main {
             }
             for (int j = i + 1; j < n; ++ j) {
                 for (int k = 0; k < bn; ++ k) {
-                    if (!xorBits[i][j].get(k).equals(
-                                xorBits[j][i].get(k))) return 0;
+                    if (!xorBits[i][j].get(k).equals(xorBits[j][i].get(k))) return 0;
                 }
             }
         }
@@ -104,9 +103,7 @@ public class Main {
             for (int j = 0; j < (1 << n); ++ j) {
                 int k;
                 for (k = 0; k < n; ++ k) {
-                    if ((i & (1 << k)) == 0 && (j & (1 << k)) != 0) {
-                        break;
-                    }
+                    if ((i & (1 << k)) == 0 && (j & (1 << k)) != 0) break;
                 }
                 if (k == n) c[i].add(j);
             }
@@ -123,9 +120,7 @@ public class Main {
         while (scanner.hasNextInt()) {
             int n = scanner.nextInt();
             int[] s = new int[n];
-            for (int i = 0; i < n; ++ i) {
-                s[i] = scanner.nextInt();
-            }
+            for (int i = 0; i < n; ++ i) s[i] = scanner.nextInt();
             int m = scanner.nextInt();
             int ans = new Main().countLists(s, m);
             System.out.println(ans);

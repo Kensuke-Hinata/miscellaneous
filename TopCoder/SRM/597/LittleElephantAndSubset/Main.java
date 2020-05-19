@@ -19,9 +19,7 @@ public class Main {
     }
 
     boolean ok(int nm, int pm, int pl, int cl, int len) {
-        if ((cl < len || nm != 2) && (pl < cl || pl == cl && pm == 0)) {
-            return true;
-        }
+        if ((cl < len || nm != 2) && (pl < cl || pl == cl && pm == 0)) return true;
         return false;
     }
 

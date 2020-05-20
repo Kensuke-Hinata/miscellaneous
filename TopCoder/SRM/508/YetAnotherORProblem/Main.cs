@@ -43,10 +43,7 @@ public class Main
     {
         int n = R.Length;
         List<int>[] b = new List<int>[n];
-        for (int i = 0; i < n; ++ i)
-        {
-            b[i] = toBinary(R[i]);
-        }
+        for (int i = 0; i < n; ++ i) b[i] = toBinary(R[i]);
         int[,] cmask = new int[63, n + 1];
         for (int i = 0; i < 63; ++ i)
         {
@@ -56,27 +53,18 @@ public class Main
                 mask = 0;
                 for (int k = 0; k < n; ++ k)
                 {
-                    if (j != k && b[k][i] == 1)
-                    {
-                        mask |= 1 << k;
-                    }
+                    if (j != k && b[k][i] == 1) mask |= 1 << k;
                 }
                 cmask[i, j] = mask;
             }
             mask = 0;
-            for (int j = 0; j < n; ++ j)
-            {
-                if (b[j][i] == 1) mask |= 1 << j;
-            }
+            for (int j = 0; j < n; ++ j) if (b[j][i] == 1) mask |= 1 << j;
             cmask[i, n] = mask;
         }
         int[,] dp = new int[64, 1 << n];
         for (int i = 0; i < 64; ++ i)
         {
-            for (int j = 0; j < (1 << n); ++ j)
-            {
-                dp[i, j] = -1;
-            }
+            for (int j = 0; j < (1 << n); ++ j) dp[i, j] = -1;
         }
         return recur(0, 0, n, dp, b, cmask);
     }
@@ -138,10 +126,7 @@ public class Main
         //}
         /*Console.WriteLine(obj.countSequences(R));*/
         long[] R = new long[10];
-        for (int i = 0; i < 10; ++ i)
-        {
-            R[i] = 1000000000000000000;
-        }
+        for (int i = 0; i < 10; ++ i) R[i] = 1000000000000000000;
         Console.WriteLine(obj.countSequences(R));
     }
 }

@@ -41,9 +41,7 @@ public class Main {
             if (pos.size() > 0) pos.clear();
         }
         int[][] dp = new int[1 << b][N + 1];
-        for (int i = 0; i < (1 << b); ++ i) {
-            Arrays.fill(dp[i], -1);
-        }
+        for (int i = 0; i < (1 << b); ++ i) Arrays.fill(dp[i], -1);
         return recur(0, 0, N, dp, c);
     }
 

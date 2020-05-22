@@ -10,6 +10,7 @@ typedef vector<int> vi;
 class SelfDescFind {
     protected:
         bool zflag;
+
     public:
         LL recur(int mask, int n, vi& c, vi& cnt, vi& d, vector<LL>& dp) {
             LL& res = dp[mask];
@@ -27,6 +28,7 @@ class SelfDescFind {
             }
             return res;
         }
+
         void bf(int pidx, int bc, int bound, string& ans, vi& c, vi& cnt, vi& d, vector<LL>& dp) {
             if (SZ(c) == SZ(d)) {
                 fill(cnt.begin(), cnt.end(), 0);
@@ -53,6 +55,7 @@ class SelfDescFind {
                 c.pop_back();
             }
         }
+
         string construct(vi d) {
             if (d[0] == 0 && (SZ(d) == 1 || d[1] != 1)) return "";
             auto bc = 0, bound = SZ(d) << 1;
@@ -79,9 +82,6 @@ int main(int argc, char** argv) {
             if (i & (1 << j)) d.push_back(j);
         }
         auto ret = obj.construct(d);
-        for (int j = 0; j < SZ(d); ++ j) cout << d[j] << " ";
-        cout << endl;
-        cout << ret << endl;
         vi c(10);
         fill(c.begin(), c.end(), 0);
         for (int j = 0; j < ret.length(); ++ j) {

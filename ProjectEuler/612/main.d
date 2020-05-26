@@ -4,7 +4,7 @@ import std.conv;
 
 //long[long] dup;
 
-int saiki(int idx, int n, int pmask, int qmask, int flag, int[][][][] dp, int mod, long p, long q, ref long cnt)
+int recur(int idx, int n, int pmask, int qmask, int flag, int[][][][] dp, int mod, long p, long q, ref long cnt)
 {
     if (idx == n)
     {
@@ -42,7 +42,7 @@ int saiki(int idx, int n, int pmask, int qmask, int flag, int[][][][] dp, int mo
             if (i < j) nextFlag = 1;
             auto qNextMask = qmask;
             if (qmask > 1 || j > 0) qNextMask |= 1 << j;
-            auto ret = saiki(idx + 1, n, pNextMask, qNextMask, nextFlag, dp, mod, p * 10 + i, q * 10 + j, cnt);
+            auto ret = recur(idx + 1, n, pNextMask, qNextMask, nextFlag, dp, mod, p * 10 + i, q * 10 + j, cnt);
             res += ret;
             if (res >= mod) res -= mod;
         }
@@ -60,7 +60,7 @@ void solve()
         foreach (k; 0 .. 1024) fill(dp[i][j][k], -1);
     }
     long cnt = 0;
-    auto res = saiki(0, n, 0, 0, 0, dp, 1000267129, 0, 0, cnt);
+    auto res = recur(0, n, 0, 0, 0, dp, 1000267129, 0, 0, cnt);
     writeln(cnt);
     writeln(res);
 }

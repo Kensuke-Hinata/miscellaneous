@@ -3,15 +3,9 @@ import java.math.*;
 
 public class Main {
     BigInteger recur(int idx, int n, BigInteger[] dp) {
-        if (idx == n) {
-            return new BigInteger("1");
-        }
-        if (idx > n) {
-            return new BigInteger("0");
-        }
-        if (!dp[idx].equals(new BigInteger("-1"))) {
-            return dp[idx];
-        }
+        if (idx == n) return new BigInteger("1");
+        if (idx > n) return new BigInteger("0");
+        if (!dp[idx].equals(new BigInteger("-1"))) return dp[idx];
         BigInteger res = new BigInteger("0");
         res = res.add(recur(idx + 1, n, dp));
         res = res.add(recur(idx + 2, n, dp));
@@ -20,8 +14,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
         Main b = new Main();
+        Scanner s = new Scanner(System.in);
         while (s.hasNext()) {
             int N = s.nextInt();
             BigInteger[] dp = new BigInteger[N + 1];

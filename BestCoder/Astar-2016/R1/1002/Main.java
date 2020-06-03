@@ -29,5 +29,6 @@ public class Main {
             BigInteger res = b.recur(0, N, dp);
             System.out.println(res);
         }
+        s.close();
     }
 }

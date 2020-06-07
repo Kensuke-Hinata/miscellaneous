@@ -10,10 +10,9 @@ int solve(int n, int m, int v, int k) {
     if (val <= m) return -1;
     val = m;
     auto cnt = 0;
-    while (true) {
+    while (val < n) {
         ++ cnt;
         val = (val - v) * k;
-        if (val >= n) break;
     }
     return cnt;
 }

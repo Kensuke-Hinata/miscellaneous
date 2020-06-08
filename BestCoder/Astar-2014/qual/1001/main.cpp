@@ -8,12 +8,8 @@ int solve(int n, int m, int v, int k) {
     if (m >= n) return 0;
     auto val = (LL)(m - v) * k;
     if (val <= m) return -1;
-    val = m;
     auto cnt = 0;
-    while (val < n) {
-        ++ cnt;
-        val = (val - v) * k;
-    }
+    for (val = m; val < n; val = (val - v) * k) ++ cnt;
     return cnt;
 }
 

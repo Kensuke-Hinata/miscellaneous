@@ -42,8 +42,8 @@ int main(int argc, char** argv) {
         scanf("%d %d %d", &n, &m, &k);
         vector<string> vs(n);
         for (int j = 0; j < n; ++ j) cin >> vs[j];
-        auto res = solve(n, m, k, vs);
-        printf("Case #%d: %d\n", i, res);
+        auto ret = solve(n, m, k, vs);
+        printf("Case #%d: %d\n", i, ret);
     }
     return 0;
 }

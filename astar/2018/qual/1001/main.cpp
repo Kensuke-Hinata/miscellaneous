@@ -2,8 +2,6 @@
 
 using namespace std;
 
-typedef long long LL;
-
 int solve(int n, int m, int k, vector<string>& vs) {
     auto res = 0;
     vector<int> cnt(1 << m);
@@ -19,7 +17,7 @@ int solve(int n, int m, int k, vector<string>& vs) {
             }
             ++ cnt[mask];
         }
-        LL sum = 0, acc = 0;
+        long long sum = 0, acc = 0;
         for (int j = 0; j < (1 << m); ++ j) {
             if (cnt[j] > 0) {
                 sum += acc * cnt[j];

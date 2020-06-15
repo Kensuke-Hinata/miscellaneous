@@ -2,11 +2,9 @@
 
 using namespace std;
 
-typedef long long LL;
-
 int solve(int n, int m, int v, int k) {
     if (m >= n) return 0;
-    auto val = (LL)(m - v) * k;
+    auto val = (long long)(m - v) * k;
     if (val <= m) return -1;
     auto cnt = 0;
     for (val = m; val < n; val = (val - v) * k) ++ cnt;

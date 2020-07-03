@@ -26,26 +26,15 @@ class BlindBoxSets {
 	public:
         #define N 51
         double dp[N][N][N][N];
+
         double recur(int i, int j, int k, int t, int ns, int n) {
             double& res = dp[i][j][k][t];
             if (res != -1) return res;
-            if (ns == 1 && i == 0) {
-                res = 0.0;
-                return res;
-            }
-            if (ns == 2 && i + j == 0) {
-                res = 0.0;
-                return res;
-            }
-            if (ns == 3 && i + j + k == 0) {
-                res = 0.0;
-                return res;
-            }
-            if (ns == 4 && i + j + k + t == 0) {
-                res = 0.0;
-                return res;
-            }
             res = 0.0;
+            if (ns == 1 && i == 0) return res;
+            if (ns == 2 && i + j == 0) return res;
+            if (ns == 3 && i + j + k == 0) return res;
+            if (ns == 4 && i + j + k + t == 0) return res;
             if (i > 0) {
                 double ret = recur(i - 1, j + 1, k, t, ns, n);
                 res += (double)i / n * (ret + 1);
@@ -62,7 +51,7 @@ class BlindBoxSets {
                 double ret = recur(i, j, k, t - 1, ns, n);
                 res += (double)t / n * (ret + 1);
             }
-            int num = 1;
+            auto num = 1;
             if (ns == 1) num = i;
             else if (ns == 2) num = i + j;
             else if (ns == 3) num = i + j + k;
@@ -70,16 +59,9 @@ class BlindBoxSets {
             res = (res + (double)(n - num) / n) * n / num;
             return res;
         }
+
         double expectedPurchases(int ns, int n) {
-            for (int i = 0; i <= n; ++ i) {
-                for (int j = 0; j <= n; ++ j) {
-                    for (int k = 0; k <= n; ++ k) {
-                        for (int t = 0; t <= n; ++ t) {
-                            dp[i][j][k][t] = -1;
-                        }
-                    }
-                }
-            }
+            memset(dp, 255, sizeof(dp));
             return recur(n, 0, 0, 0, ns, n);
         }
 };

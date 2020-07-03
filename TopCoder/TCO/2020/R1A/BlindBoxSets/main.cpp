@@ -23,7 +23,7 @@ typedef vector<int> vi;
 typedef vector<ll> vll;
 
 class BlindBoxSets {
-	public:
+    public:
         #define N 51
         double dp[N][N][N][N];
 

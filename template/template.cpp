@@ -13,7 +13,7 @@ using namespace std;
 #define ZERO(v) memset(v, 0, sizeof(v))
 #define REP(i, n) for (int i = 0; i < n; ++ i)
 
-typedef long long ll;
+typedef long long LL;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 typedef vector<ll> vll;

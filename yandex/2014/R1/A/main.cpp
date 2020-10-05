@@ -29,28 +29,29 @@ LL solve(vector<int>& a) {
     s.insert(0);
     for (int i = 0; i < SZ(a); ++ i) {
         set<LL> t;
-        for (set<LL>::iterator iter = s.begin(); iter != s.end(); ++ iter) {
-            auto r = *iter + a[i];
+        for (set<LL>::iterator j = s.begin(); j != s.end(); ++ j) {
+            auto r = *j + a[i];
             auto ret = permute(r);
-            for (set<LL>::iterator it = ret.begin(); it != ret.end(); ++ it) {
-                t.insert(*it);
+            for (set<LL>::iterator k = ret.begin(); k != ret.end(); ++ k) {
+                t.insert(*k);
             }
         }
         s = t;
     }
     LL ans = 0;
-    for (set<LL>::iterator it = s.begin(); it != s.end(); ++ it) {
-        ans = max(ans, *it);
+    for (set<LL>::iterator i = s.begin(); i != s.end(); ++ i) {
+        ans = max(ans, *i);
     }
     return ans;
 }
 
 int main(int argc, char** argv) {
     int n;
-    cin >> n;
-    vector<int> a(n);
-    for (int i = 0; i < n; ++ i) cin >> a[i];
-    auto ret = solve(a);
-    cout << ret << endl;
+    while (cin >> n) {
+        vector<int> a(n);
+        for (int i = 0; i < n; ++ i) cin >> a[i];
+        auto ret = solve(a);
+        cout << ret << endl;
+    }
     return 0;
 }

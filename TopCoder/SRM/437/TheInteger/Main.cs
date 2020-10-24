@@ -30,7 +30,7 @@ public class TheInteger
         for (int i = start; i <= 9; ++ i)
         {
             int nflag = (i > b[idx]) ? 1 : flag;
-            int nk = (mask & (1 << i)) != 0 ? k : (k - 1); 
+            int nk = ((mask & (1 << i)) != 0) ? k : (k - 1);
             long ret = Recur(idx + 1, mask | (1 << i), nflag, nk, dp, b, mul);
             if (ret != Inf)
             {

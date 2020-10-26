@@ -39,7 +39,7 @@ public class YetAnotherORProblem
         return res;
     }
 
-    int countSequences(long[] R)
+    public int countSequences(long[] R)
     {
         int n = R.Length;
         List<int>[] b = new List<int>[n];

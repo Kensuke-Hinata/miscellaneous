@@ -43,7 +43,7 @@ public class Main {
         return res;
     }
 
-    int countLists(int[] s, int m) {
+    public int countLists(int[] s, int m) {
         n = (int)Math.sqrt(s.length);
         mbits = transform(m);
         Collections.reverse(mbits);

@@ -17,7 +17,7 @@ public class Main {
         return res;
     }
 
-    int countSequences(int N, int R) {
+    public int countSequences(int N, int R) {
         int b;
         for (b = 0; (1 << b) <= R; ++ b);
         ArrayList<Integer>[] c = new ArrayList[1 << b];

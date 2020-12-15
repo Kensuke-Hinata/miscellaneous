@@ -50,14 +50,19 @@ public class FiveHundredEleven
     static void Main()
     {
         FiveHundredEleven obj = new FiveHundredEleven();
+
         int[] cards = new int[]{3, 5, 7, 9, 510};
         Console.WriteLine(obj.theWinner(cards));
+
         cards = new int[]{0, 0, 0, 0};
         Console.WriteLine(obj.theWinner(cards));
+
         cards = new int[]{511};
         Console.WriteLine(obj.theWinner(cards));
+
         cards = new int[]{5, 58, 192, 256};
         Console.WriteLine(obj.theWinner(cards));
+
         cards = new int[]{0};
         Console.WriteLine(obj.theWinner(cards));
     }

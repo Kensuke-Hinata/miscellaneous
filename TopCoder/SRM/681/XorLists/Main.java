@@ -116,15 +116,30 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextInt()) {
-            int n = scanner.nextInt();
-            int[] s = new int[n];
-            for (int i = 0; i < n; ++ i) s[i] = scanner.nextInt();
-            int m = scanner.nextInt();
-            int ans = new Main().countLists(s, m);
-            System.out.println(ans);
-        }
-        scanner.close();
+        Main obj = new Main();
+
+        int n = 1;
+        int[] s = new int[]{0};
+        int m = 10000;
+        int ans = obj.countLists(s, m);
+        assert ans == 10001;
+
+        n = 1;
+        s = new int[]{1};
+        m = 10000;
+        ans = obj.countLists(s, m);
+        assert ans == 0;
+
+        n = 9;
+        s = new int[]{0, 1, 2, 1, 0, 3, 2, 3, 0};
+        m = 5;
+        ans = obj.countLists(s, m);
+        assert ans == 4;
+
+        n = 4;
+        s = new int[]{0, 3, 3, 0};
+        m = 2;
+        ans = obj.countLists(s, m);
+        assert ans == 2;
     }
 }

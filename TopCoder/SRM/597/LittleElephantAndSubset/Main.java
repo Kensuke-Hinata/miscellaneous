@@ -76,11 +76,22 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            int N = scanner.nextInt();
-            System.out.println(new Main().getNumber(N));
-        }
-        scanner.close();
+        Main obj = new Main();
+
+        int n = 3;
+        int ans = obj.getNumber(n);
+        assert ans == 7;
+
+        n = 10;
+        ans = obj.getNumber(n);
+        assert ans == 767;
+
+        n = 47;
+        ans = obj.getNumber(n);
+        assert ans == 25775;
+
+        n = 4777447;
+        ans = obj.getNumber(n);
+        assert ans == 66437071;
     }
 }

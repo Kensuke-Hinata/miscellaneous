@@ -46,12 +46,26 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            int N = scanner.nextInt();
-            int R = scanner.nextInt();
-            System.out.println(new Main().countSequences(N, R));
-        }
-        scanner.close();
+        Main obj = new Main();
+
+        int N = 2;
+        int R = 2;
+        int ans = obj.countSequences(N, R);
+        assert ans == 7;
+
+        N = 2;
+        R = 3;
+        ans = obj.countSequences(N, R);
+        assert ans == 9;
+
+        N = 3;
+        R = 3;
+        ans = obj.countSequences(N, R);
+        assert ans == 16;
+
+        N = 7;
+        R = 1023;
+        ans = obj.countSequences(N, R);
+        assert ans == 73741815;
     }
 }

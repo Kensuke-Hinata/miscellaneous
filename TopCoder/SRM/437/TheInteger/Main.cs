@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 
 public class TheInteger
@@ -71,66 +72,82 @@ public class TheInteger
 
         long n = 47;
         int k = 1;
-        Console.WriteLine(obj.find(n, k));
+        long ans = obj.find(n, k);
+        Debug.Assert(ans == 55);
 
         n = 7;
         k = 3;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 102);
 
         n = 69;
         k = 2;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 69);
 
         n = 12364;
         k = 3;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 12411);
 
         n = 111;
         k = 3;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 120);
 
         n = 103;
         k = 4;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 1023);
 
         n = 999;
         k = 1;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 999);
 
         n = 100;
         k = 10;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 1023456789);
 
         n = 100;
         k = 3;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 102);
 
         n = 9876543210;
         k = 9;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 9876543211);
 
         n = 8876543210123456789;
         k = 1;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 8888888888888888888);
 
         n = 8876543210123456789;
         k = 9;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 8876543210123456800);
 
         n = 8876543210123456789;
         k = 10;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 8876543210123456789);
 
         n = 1000000000000000000;
         k = 1;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 1111111111111111111);
 
         n = 1000000000000000000;
         k = 9;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 1000000000002345678);
 
         n = 1000000000000000000;
         k = 10;
-        Console.WriteLine(obj.find(n, k));
+        ans = obj.find(n, k);
+        Debug.Assert(ans == 1000000000023456789);
     }
 }

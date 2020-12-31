@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 
 public class YetAnotherORProblem 
@@ -72,61 +73,25 @@ public class YetAnotherORProblem
     static void Main()
     {
         YetAnotherORProblem obj = new YetAnotherORProblem();
-        /*string str = string.Empty;*/
-        //do
-        //{
-            //str = Console.ReadLine();
-            //if (str == null) break;
-            //string[] words = str.Split(' ');
-            //int N, R;
-            //int.TryParse(words[0], out N);
-            //int.TryParse(words[1], out R);
-            //long[] a = new long[N];
-            //for (int i = 0; i < N; ++ i)
-            //{
-                //a[i] = R;
-            //}
-            //Console.WriteLine(obj.countSequences(a));
-        /*} while (true);*/
-        /*long[] R = new long[2];*/
-        //R[0] = R[1] = 2;
-        //Console.WriteLine(obj.countSequences(R));
-        //R[0] = R[1] = 3;
-        //Console.WriteLine(obj.countSequences(R));
-        //R = new long[3];
-        //R[0] = R[1] = R[2] = 3;
-        //Console.WriteLine(obj.countSequences(R));
-        //R = new long[7];
-        //for (long i = 0; i < 7; ++ i)
-        //{
-            //R[i] = 1023;
-        //}
-        //Console.WriteLine(obj.countSequences(R));
-        //R = new long[2];
-        //R[0] = 3;
-        //R[1] = 5;
-        //Console.WriteLine(obj.countSequences(R));
-        //R = new long[2];
-        //R[0] = 1;
-        //R[1] = 128;
-        //Console.WriteLine(obj.countSequences(R));
-        //R = new long[4];
-        //R[0] = 26;
-        //R[1] = 74;
-        //R[2] = 25;
-        //R[3] = 30;
-        //Console.WriteLine(obj.countSequences(R));
-        //R = new long[2];
-        //R[0] = R[1] = 1000000000;
-        //Console.WriteLine(obj.countSequences(R));
-        //R = new long[10];
-        //for (int i = 0; i < 10; ++ i)
-        //{
-            //R[i] = 15000;
-        //}
-        /*Console.WriteLine(obj.countSequences(R));*/
-        long[] R = new long[10];
-        for (int i = 0; i < 10; ++ i) R[i] = 1000000000000000000;
-        Console.WriteLine(obj.countSequences(R));
+
+        long[] R = new long[]{3, 5};
+        int ans = obj.countSequences(R);
+        Debug.Assert(ans == 15);
+
+        R = new long[]{3, 3, 3};
+        ans = obj.countSequences(R);
+        Debug.Assert(ans == 16);
+
+        R = new long[]{1, 128};
+        ans = obj.countSequences(R);
+        Debug.Assert(ans == 194);
+
+        R = new long[]{26, 74, 25, 30};
+        ans = obj.countSequences(R);
+        Debug.Assert(ans == 8409);
+
+        R = new long[]{1000000000,1000000000};
+        ans = obj.countSequences(R);
+        Debug.Assert(ans == 420352509);
     }
 }

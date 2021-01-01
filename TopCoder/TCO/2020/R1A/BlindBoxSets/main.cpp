@@ -22,11 +22,11 @@ typedef pair<int, int> pii;
 typedef vector<int> vi;
 typedef vector<ll> vll;
 
+#define N 51
+double dp[N][N][N][N];
+
 class BlindBoxSets {
     public:
-        #define N 51
-        double dp[N][N][N][N];
-
         double recur(int i, int j, int k, int t, int ns, int n) {
             double& res = dp[i][j][k][t];
             if (res != -1) return res;
@@ -61,11 +61,39 @@ class BlindBoxSets {
         }
 
         double expectedPurchases(int ns, int n) {
-            memset(dp, 255, sizeof(dp));
+            for (int i = 0; i < N; ++ i) {
+                for (int j = 0; j < N; ++ j) {
+                    for (int k = 0; k < N; ++ k) {
+                        for (int t = 0; t < N; ++ t) dp[i][j][k][t] = -1;
+                    }
+                }
+            }
             return recur(n, 0, 0, 0, ns, n);
         }
 };
 
 int main(int argc, char** argv) {
+    BlindBoxSets obj;
+
+    auto num_sets = 1;
+    auto num_items = 1;
+    auto ans = obj.expectedPurchases(num_sets, num_items);
+    assert(ans == 1.0);
+
+    num_sets = 1;
+    num_items = 2;
+    ans = obj.expectedPurchases(num_sets, num_items);
+    assert(ans == 3.0);
+
+    num_sets = 2;
+    num_items = 1;
+    ans = obj.expectedPurchases(num_sets, num_items);
+    assert(ans == 2.0);
+
+    num_sets = 2;
+    num_items = 2;
+    ans = obj.expectedPurchases(num_sets, num_items);
+    assert(ans == 5.5);
+
     return 0;
 }

@@ -76,20 +76,36 @@ class SelfDescFind {
 
 int main(int argc, char** argv) {
     SelfDescFind obj;
-    for (int i = 1; i < 1024; ++ i) {
-        vi d;
-        for (int j = 0; j < 10; ++ j) {
-            if (i & (1 << j)) d.push_back(j);
-        }
-        auto ret = obj.construct(d);
-        vi c(10);
-        fill(c.begin(), c.end(), 0);
-        for (int j = 0; j < ret.length(); ++ j) {
-            ++ c[ret[j] - '0'];
-        }
-        for (int j = 0; j < ret.length(); j += 2) {
-            assert(c[ret[j + 1] - '0'] == ret[j] - '0');
-        }
-    }
+    vi d;
+
+    d.push_back(1);
+    auto ans = obj.construct(d);
+    assert(ans == "");
+
+    d.clear();
+    d.push_back(2);
+    ans = obj.construct(d);
+    assert(ans == "22");
+
+    d.clear();
+    d.insert(d.end(), {0, 1, 3, 4});
+    ans = obj.construct(d);
+    assert(ans == "10143133");
+
+    d.clear();
+    d.insert(d.end(), {0, 1, 2, 4, 5, 6, 8, 9});
+    ans = obj.construct(d);
+    assert(ans == "");
+
+    d.clear();
+    d.insert(d.end(), {0, 1, 2, 3, 5, 6, 8, 9});
+    ans = obj.construct(d);
+    assert(ans == "1016181923253251");
+
+    d.clear();
+    d.push_back(4);
+    ans = obj.construct(d);
+    assert(ans == "");
+
     return 0;
 }

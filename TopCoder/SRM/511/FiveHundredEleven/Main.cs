@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 public class FiveHundredEleven
 {
@@ -52,18 +54,23 @@ public class FiveHundredEleven
         FiveHundredEleven obj = new FiveHundredEleven();
 
         int[] cards = new int[]{3, 5, 7, 9, 510};
-        Console.WriteLine(obj.theWinner(cards));
+        String ans = obj.theWinner(cards);
+        Debug.Assert(ans == "Fox Ciel");
 
         cards = new int[]{0, 0, 0, 0};
-        Console.WriteLine(obj.theWinner(cards));
+        ans = obj.theWinner(cards);
+        Debug.Assert(ans == "Toastman");
 
         cards = new int[]{511};
-        Console.WriteLine(obj.theWinner(cards));
+        ans = obj.theWinner(cards);
+        Debug.Assert(ans == "Toastman");
 
         cards = new int[]{5, 58, 192, 256};
-        Console.WriteLine(obj.theWinner(cards));
+        ans = obj.theWinner(cards);
+        Debug.Assert(ans == "Fox Ciel");
 
         cards = new int[]{0};
-        Console.WriteLine(obj.theWinner(cards));
+        ans = obj.theWinner(cards);
+        Debug.Assert(ans == "Fox Ciel");
     }
 }

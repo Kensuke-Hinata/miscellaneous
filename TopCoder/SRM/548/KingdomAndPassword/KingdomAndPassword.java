@@ -53,13 +53,13 @@ public class KingdomAndPassword {
         long[][] p = calcPower();
         long[][] dp = new long[1 << ds.length][2];
         for (int i = 0; i < dp.length; ++ i) Arrays.fill(dp[i], -1);
-        long less = recur(0, 0, 0, ds, rds, p, dp, 0);
+        long lt = recur(0, 0, 0, ds, rds, p, dp, 0);
         for (int i = 0; i < dp.length; ++ i) Arrays.fill(dp[i], -1);
-        long greater = recur(0, 0, 0, ds, rds, p, dp, 1);
-        if (greater == Long.MAX_VALUE && less == Long.MIN_VALUE) return -1;
-        if (greater == Long.MAX_VALUE) return less;
-        if (less == Long.MIN_VALUE) return greater;
-        return (op - less <= greater - op ? less : greater);
+        long gt = recur(0, 0, 0, ds, rds, p, dp, 1);
+        if (gt == Long.MAX_VALUE && lt == Long.MIN_VALUE) return -1;
+        if (gt == Long.MAX_VALUE) return lt;
+        if (lt == Long.MIN_VALUE) return gt;
+        return (op - lt <= gt - op ? lt : gt);
     }
     
     public static void main(String[] args) {
@@ -93,7 +93,7 @@ public class KingdomAndPassword {
         op = 123;
         rds = new int[]{3, 2, 1};
         ans = obj.newPassword(op, rds);
-        assert ans == 123;
+        assert ans == 132;
 
         op = 123;
         rds = new int[]{1, 2, 3};

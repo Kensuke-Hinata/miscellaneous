@@ -45,8 +45,7 @@ public class FiveHundredEleven
         int[,] dp = new int[512, n + 1];
         for (int i = 0; i < 512; ++ i) for (int j = 0; j <= n; ++ j) dp[i, j] = -1;
         int res = Recur(0, 0, dp, cards);
-        if (res == 1) return "Fox Ciel";
-        return "Toastman";
+        return (res == 1 ? "Fox Ciel" : "Toastman");
     }
 
     static void Main()

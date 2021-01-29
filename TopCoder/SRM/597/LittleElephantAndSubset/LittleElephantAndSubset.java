@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Main {
+public class LittleElephantAndSubset {
     static int mod = 1000000007;
 
     int[] itoa(int n) {
@@ -10,7 +10,7 @@ public class Main {
             res[res.length - 1] = n % 10;
             n /= 10;
         }
-        for (int i = 0; i < res.length >> 1; ++ i) {
+        for (int i = 0; i < (res.length >> 1); ++ i) {
             res[i] ^= res[res.length - i - 1];
             res[res.length - i - 1] ^= res[i];
             res[i] ^= res[res.length - i - 1];
@@ -76,7 +76,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main obj = new Main();
+        LittleElephantAndSubset obj = new LittleElephantAndSubset();
 
         int n = 3;
         int ans = obj.getNumber(n);

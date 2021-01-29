@@ -1,7 +1,7 @@
 import java.util.*;
 import java.math.*;
 
-public class Main {
+public class XorLists {
     protected int n;
     protected int bn;
     protected boolean[][] ok;
@@ -116,33 +116,28 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main obj = new Main();
+        XorLists obj = new XorLists();
 
-        int n = 1;
         int[] s = new int[]{0};
         int m = 10000;
         int ans = obj.countLists(s, m);
         assert ans == 10001;
 
-        n = 1;
         s = new int[]{1};
         m = 10000;
         ans = obj.countLists(s, m);
         assert ans == 0;
 
-        n = 9;
         s = new int[]{0, 1, 2, 1, 0, 3, 2, 3, 0};
         m = 5;
         ans = obj.countLists(s, m);
         assert ans == 4;
 
-        n = 4;
         s = new int[]{0, 3, 3, 0};
         m = 2;
         ans = obj.countLists(s, m);
         assert ans == 2;
 
-        n = 4;
         s = new int[]{
             0,18955782,19774078,15197314,10559559,9167552,1059865,10395923,23165910,45583720,
                 18955782,0,820344,29809284,25173569,27974854,19993119,29335317,4212176,60207982,

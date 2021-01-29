@@ -1,7 +1,7 @@
 import java.util.*;
 
-public class Main {
-    int recur(int mask, int idx, int N, int[][] dp, ArrayList<Integer>[] c) {
+public class YetAnotherORProblem2 {
+    int recur(int mask, int idx, int N, int[][] dp, List<Integer>[] c) {
         if (dp[mask][idx] != -1) return dp[mask][idx];
         if (idx == N) {
             dp[mask][idx] = 1;
@@ -20,8 +20,8 @@ public class Main {
     public int countSequences(int N, int R) {
         int b;
         for (b = 0; (1 << b) <= R; ++ b);
-        ArrayList<Integer>[] c = new ArrayList[1 << b];
-        ArrayList<Integer> pos = new ArrayList<Integer>();
+        List<Integer>[] c = new ArrayList[1 << b];
+        List<Integer> pos = new ArrayList<Integer>();
         for (int i = 0; i < (1 << b); ++ i) {
             c[i] = new ArrayList<Integer>();
             for (int j = 0; j < b; ++ j) {
@@ -46,7 +46,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main obj = new Main();
+        YetAnotherORProblem2 obj = new YetAnotherORProblem2();
 
         int N = 2;
         int R = 2;

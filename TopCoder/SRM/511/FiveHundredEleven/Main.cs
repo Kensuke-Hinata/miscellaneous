@@ -2,7 +2,7 @@ using System;
 
 public class FiveHundredEleven
 {
-    int recur(int mask, int steps, int[,] dp, int[] cards)
+    int Recur(int mask, int steps, int[,] dp, int[] cards)
     {
         if (dp[mask, steps] != -1) return dp[mask, steps];
         if (steps == cards.Length)
@@ -20,7 +20,7 @@ public class FiveHundredEleven
             }
             else if (nextMask != 511)
             {
-                int ret = recur(mask | cards[i], steps + 1, dp, cards);
+                int ret = Recur(mask | cards[i], steps + 1, dp, cards);
                 if (ret == 0)
                 {
                     dp[mask, steps] = 1;
@@ -31,7 +31,7 @@ public class FiveHundredEleven
         dp[mask, steps] = 0;
         if (steps < cnt)
         {
-            int ret = recur(mask, steps + 1, dp, cards);
+            int ret = Recur(mask, steps + 1, dp, cards);
             if (ret == 0) dp[mask, steps] = 1;
         }
         return dp[mask, steps];
@@ -42,7 +42,7 @@ public class FiveHundredEleven
         int n = cards.Length;
         int[,] dp = new int[512, n + 1];
         for (int i = 0; i < 512; ++ i) for (int j = 0; j <= n; ++ j) dp[i, j] = -1;
-        int res = recur(0, 0, dp, cards);
+        int res = Recur(0, 0, dp, cards);
         if (res == 1) return "Fox Ciel";
         return "Toastman";
     }

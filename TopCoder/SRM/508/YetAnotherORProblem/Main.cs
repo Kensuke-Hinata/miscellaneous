@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class YetAnotherORProblem 
 {
-    List<int> toBinary(long num)
+    List<int> GetBits(long num)
     {
         List<int> res = new List<int>();
         for (int i = 62; i >= 0; -- i)
@@ -16,7 +16,7 @@ public class YetAnotherORProblem
         return res;
     }
 
-    int recur(int idx, int mask, int n, int[,] dp, List<int>[] b, int[,] cmask)
+    int Recur(int idx, int mask, int n, int[,] dp, List<int>[] b, int[,] cmask)
     {
         if (dp[idx, mask] != -1) return dp[idx, mask];
         if (idx == 63)
@@ -30,11 +30,11 @@ public class YetAnotherORProblem
         {
             if (b[i][idx] == 1 || (mask & (1 << i)) != 0)
             {
-                res += recur(idx + 1, mask | cmask[idx, i], n, dp, b, cmask);
+                res += Recur(idx + 1, mask | cmask[idx, i], n, dp, b, cmask);
                 res %= mod;
             }
         }
-        res += recur(idx + 1, mask | cmask[idx, n], n, dp, b, cmask);
+        res += Recur(idx + 1, mask | cmask[idx, n], n, dp, b, cmask);
         res %= mod;
         dp[idx, mask] = res;
         return res;
@@ -44,7 +44,7 @@ public class YetAnotherORProblem
     {
         int n = R.Length;
         List<int>[] b = new List<int>[n];
-        for (int i = 0; i < n; ++ i) b[i] = toBinary(R[i]);
+        for (int i = 0; i < n; ++ i) b[i] = GetBits(R[i]);
         int[,] cmask = new int[63, n + 1];
         for (int i = 0; i < 63; ++ i)
         {
@@ -67,7 +67,7 @@ public class YetAnotherORProblem
         {
             for (int j = 0; j < (1 << n); ++ j) dp[i, j] = -1;
         }
-        return recur(0, 0, n, dp, b, cmask);
+        return Recur(0, 0, n, dp, b, cmask);
     }
 
     static void Main()

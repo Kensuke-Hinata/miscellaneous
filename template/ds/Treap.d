@@ -10,8 +10,8 @@ class Treap(T)
         T val;
         long priority;
         int size;   // subtree size
+        int distinct;   // subtree distinct size
         int count;  // count for the same value
-        int distinct;   // distinct size
 
         this()
         {

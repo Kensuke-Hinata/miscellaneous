@@ -8,21 +8,18 @@ class Treap(T)
         Node left;
         Node right;
         T val;
-        int priority;
-        int size;
+        long priority;
+        int size;   // subtree size
+        int count;  // count for the same value
+        int distinct;   // distinct size
 
         this()
         {
             left = right = null;
-            size = 1;
+            size = count = distinct = 1;
         }
 
-        //int opCmp(Node node)
-        //{
-            //return this.priority - node.priority;
-        //}
-
-        int cmpPriority(int priority)
+        int cmpPriority(long priority)
         {
             if (this.priority == priority) return 0;
             return this.priority < priority ? -1 : 1;
@@ -37,7 +34,6 @@ class Treap(T)
 
     protected Node root;
     protected Xorshift rnd;
-    protected int _size;
     protected T minimal;
     protected T maximal;
 
@@ -45,7 +41,6 @@ class Treap(T)
     {
         root = null;
         rnd = Xorshift(1234567891);
-        _size = 0;
         minimal = T.max;
         maximal = T.min;
     }
@@ -55,11 +50,25 @@ class Treap(T)
         auto rightNode = node.right;
         if (rightNode)
         {
-            node.size = 1;
-            if (node.left) node.size += node.left.size;
-            if (rightNode.left) node.size += rightNode.left.size;
-            rightNode.size = 1 + node.size;
-            if (rightNode.right) rightNode.size += rightNode.right.size;
+            node.size = node.count;
+            node.distinct = 1;
+            if (node.left)
+            {
+                node.size += node.left.size;
+                node.distinct += node.left.distinct;
+            }
+            if (rightNode.left)
+            {
+                node.size += rightNode.left.size;
+                node.distinct += rightNode.left.distinct;
+            }
+            rightNode.size = rightNode.count + node.size;
+            rightNode.distinct = 1 + node.distinct;
+            if (rightNode.right)
+            {
+                rightNode.size += rightNode.right.size;
+                rightNode.distinct += rightNode.right.distinct;
+            }
             node.right = rightNode.left;
             rightNode.left = node;
             node = rightNode;
@@ -71,11 +80,25 @@ class Treap(T)
         auto leftNode = node.left;
         if (leftNode)
         {
-            node.size = 1;
-            if (node.right) node.size += node.right.size;
-            if (leftNode.right) node.size += leftNode.right.size;
-            leftNode.size = 1 + node.size;
-            if (leftNode.left) leftNode.size += leftNode.left.size;
+            node.size = node.count;
+            node.distinct = 1;
+            if (node.right)
+            {
+                node.size += node.right.size;
+                node.distinct += node.right.distinct;
+            }
+            if (leftNode.right)
+            {
+                node.size += leftNode.right.size;
+                node.distinct += leftNode.right.distinct;
+            }
+            leftNode.size = leftNode.count + node.size;
+            leftNode.distinct = 1 + node.distinct;
+            if (leftNode.left)
+            {
+                leftNode.size += leftNode.left.size;
+                leftNode.distinct += leftNode.left.distinct;
+            }
             node.left = leftNode.right;
             leftNode.right = node;
             node = leftNode;
@@ -98,11 +121,10 @@ class Treap(T)
 
     public void insert(T val)
     {
-        auto ret = _insert(root, val);
-        if (ret) ++ _size;
+        _insert(root, val);
     }
 
-    protected bool _insert(ref Node node, T val)
+    protected int _insert(ref Node node, T val)
     {
         if (!node)
         {
@@ -110,27 +132,40 @@ class Treap(T)
             node.val = val;
             node.priority = this.rnd.front;
             this.rnd.seed(unpredictableSeed);
-            return true;
+            return 1;
         }
         auto ret = node.cmpVal(val);
-        if (ret == 0) return false;
-        bool res;
+        if (ret == 0)
+        {
+            ++ node.count;
+            ++ node.size;
+            return 0;
+        }
+        int res;
         if (ret == 1)
         {
             res = _insert(node.left, val);
-            if (res)
+            if (node.left.priority > node.priority)
             {
-                if (node.left.priority > node.priority) rightRotate(node);
-                else ++ node.size;
+                rightRotate(node);
+            }
+            else
+            {
+                ++ node.size;
+                if (res == 1) ++ node.distinct;
             }
         }
-        else if (ret == -1)
+        else
         {
             res = _insert(node.right, val);
-            if (res)
+            if (node.right.priority > node.priority)
             {
-                if (node.right.priority > node.priority) leftRotate(node);
-                else ++ node.size;
+                leftRotate(node);
+            }
+            else
+            {
+                ++ node.size;
+                if (res == 1) ++ node.distinct;
             }
         }
         return res;
@@ -138,32 +173,49 @@ class Treap(T)
 
     public void remove(T val)
     {
-        auto ret = _remove(root, val);
-        if (ret) -- _size;
+        _remove(root, val);
     }
 
-    protected bool _remove(ref Node node, T val)
+    protected int _remove(ref Node node, T val)
     {
-        if (!node) return false;
+        if (!node) return -1;
         auto ret = node.cmpVal(val);
-        if (ret == -1) return _remove(node.right, val);
-        else if (ret == 1) return _remove(node.left, val);
+        if (ret == -1)
+        {
+            auto res = _remove(node.right, val);
+            if (res != -1) -- node.size;
+            if (res == 1) -- node.distinct;
+            return res;
+        }
+        else if (ret == 1)
+        {
+            auto res = _remove(node.left, val);
+            if (res != -1) -- node.size;
+            if (res == 1) -- node.distinct;
+            return res;
+        }
+        if (node.count > 1)
+        {
+            -- node.count;
+            -- node.size;
+            return 0;
+        }
         if (!node.left && !node.right)
         {
             node = null;
-            return true;
+            return 1;
         }
         if (!node.left)
         {
             node = node.right;
-            return true;
+            return 1;
         }
         if (!node.right)
         {
             node = node.left;
-            return true;
+            return 1;
         }
-        bool res;
+        int res;
         if (node.left.cmpPriority(node.right.priority) == 1) 
         {
             rightRotate(node);
@@ -174,8 +226,9 @@ class Treap(T)
             leftRotate(node);
             res = _remove(node.left, val);
         }
-        if (res) -- node.size;
-        return res;
+        -- node.size;
+        -- node.distinct;
+        return 1;
     }
 
     protected int _countLess(Node node, T val)
@@ -273,7 +326,12 @@ class Treap(T)
 
     @property public int size()
     {
-        return _size;
+        return root.size;
+    }
+
+    @property public int distinct()
+    {
+        return root.distinct;
     }
 }
 

@@ -3,7 +3,7 @@ import std.algorithm;
 
 class SegmentTree(T)
 {
-    class Node
+    protected class Node
     {
         int leftIndex;
         int rightIndex;

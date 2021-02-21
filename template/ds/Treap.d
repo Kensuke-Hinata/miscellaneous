@@ -277,6 +277,19 @@ class Treap(T)
         return _countGreater(root, val);
     }
 
+    protected int _countEqual(Node node, T val)
+    {
+        if (!node) return 0;
+        if (node.val == val) return node.count;
+        if (node.val > val) return _countEqual(node.left, val);
+        return _countEqual(node.right, val);
+    }
+
+    public int countEqual(T val)
+    {
+        return _countEqual(root, val);
+    }
+
     protected T _getMinimal(Node node)
     {
         if (!node) return minimal; 

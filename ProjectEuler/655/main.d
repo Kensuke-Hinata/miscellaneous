@@ -18,8 +18,7 @@ void solve()
     {
         fill(pdp, 0);
         pdp[0] = 1;
-        auto bound = len >> 1;
-        if (len & 1) ++ bound;
+        auto bound = (len >> 1) + (len & 1);
         foreach (i; 0 .. bound)
         {
             fill(ndp, 0);

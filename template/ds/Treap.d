@@ -348,29 +348,6 @@ class Treap(T)
     }
 }
 
-unittest
-{
-    writeln("unit test");
-    auto treap = new Treap!int();
-    auto lst = [1, 3, 2, 4, 6, 5, 8, 7, 10, 9];
-    writeln("insert");
-    foreach (val; lst)
-    {
-        treap.insert(val);
-    }
-    treap.travel();
-    writeln("remove");
-    lst = [1, 5, 10];
-    foreach (val; lst)
-    {
-        treap.remove(val);
-    }
-    treap.travel();
-    writeln("clear");
-    treap.clear();
-    treap.travel();
-}
-
 int main(string[] args)
 {
     return 0;

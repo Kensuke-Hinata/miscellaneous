@@ -221,29 +221,6 @@ class BST(T)
     }
 }
 
-unittest
-{
-    writeln("unit test");
-    auto bst = new BST!int();
-    auto lst = [1, 3, 2, 4, 6, 5, 8, 7, 10, 9];
-    writeln("insert");
-    foreach (val; lst)
-    {
-        bst.insert(val);
-    }
-    bst.travel();
-    writeln("remove");
-    lst = [1, 5, 10];
-    foreach (val; lst)
-    {
-        bst.remove(val);
-    }
-    bst.travel();
-    writeln("clear");
-    bst.clear();
-    bst.travel();
-}
-
 int main(string[] args)
 {
     return 0;

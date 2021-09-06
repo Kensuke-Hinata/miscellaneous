@@ -80,6 +80,24 @@ class SegmentTree(T)
         return _queryMin(this.root, left, right);
     }
 
+    protected void _queryBound(Node node, int left, int right, T[] res)
+    {
+        if (left > node.rightIndex || right < node.leftIndex) return;
+        if (left <= node.leftIndex && right >= node.rightIndex)
+        {
+            res[0] = min(res[0], node.minimum);
+            res[1] = max(res[1], node.maximum);
+            return;
+        }
+        _queryBound(node.left, left, right, res);
+        _queryBound(node.right, left, right, res);
+    }
+
+    void queryBound(int left, int right, T[] res)
+    {
+        _queryBound(this.root, left, right, res);
+    }
+
     protected void pushdown(Node node)
     {
         if (node.cover)

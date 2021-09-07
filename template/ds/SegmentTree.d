@@ -10,7 +10,7 @@ class SegmentTree(T)
         int width;
         T maximum;
         T minimum;
-        bool cover;
+        bool covered;
         long sum;
         long inc;
         Node left;
@@ -21,7 +21,7 @@ class SegmentTree(T)
             this.maximum = T.min;
             this.minimum = T.max;
             this.sum = this.inc = 0;
-            this.cover = false;
+            this.covered = false;
             this.leftIndex = leftIndex;
             this.rightIndex = rightIndex;
             this.width = rightIndex - leftIndex + 1;
@@ -100,10 +100,10 @@ class SegmentTree(T)
 
     protected void pushdown(Node node)
     {
-        if (node.cover)
+        if (node.covered)
         {
-            node.cover = false;
-            node.left.cover = node.right.cover = true;
+            node.covered = false;
+            node.left.covered = node.right.covered = true;
             node.left.inc += node.inc;
             node.left.sum += node.inc * node.left.width;
             node.right.inc += node.inc;
@@ -130,7 +130,7 @@ class SegmentTree(T)
         if (left > node.rightIndex || right < node.leftIndex) return;
         if (left <= node.leftIndex && right >= node.rightIndex)
         {
-            node.cover = true;
+            node.covered = true;
             node.sum += to!long(val) * node.width;
             node.inc += val;
             return;

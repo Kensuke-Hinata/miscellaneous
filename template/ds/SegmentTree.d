@@ -109,6 +109,8 @@ class SegmentTree(T)
             node.right.inc += node.inc;
             node.right.sum += node.inc * node.right.width;
             node.inc = 0;
+            node.left.maximum = node.right.maximum = node.maximum;
+            node.left.minimum = node.right.minimum = node.minimum;
         }
     }
 
@@ -122,11 +124,51 @@ class SegmentTree(T)
         return leftSum + rightSum;
     }
 
-    long querySum(int left, int right) {
+    long querySum(int left, int right)
+    {
         return _querySum(this.root, left, right);
     }
 
-    protected void _add(Node node, int left, int right, T val) {
+    protected void updateMaximum(Node node, int left, int right, T val)
+    {
+        if (left > node.rightIndex || right < node.leftIndex) return;
+        if (left <= node.leftIndex && right >= node.rightIndex)
+        {
+            node.covered = true;
+            node.maximum = max(node.maximum, val);
+            return;
+        }
+        pushdown(node);
+        updateMaximum(node.left, left, right, val);
+        updateMaximum(node.right, left, right, val);
+    }
+
+    void updateMaximum(int left, int right, T val)
+    {
+        _updateMaximum(this.root, left, right, val);
+    }
+
+    protected void updateMinimum(Node node, int left, int right, T val)
+    {
+        if (left > node.rightIndex || right < node.leftIndex) return;
+        if (left <= node.leftIndex && right >= node.rightIndex)
+        {
+            node.covered = true;
+            node.minimum = min(node.minimum, val);
+            return;
+        }
+        pushdown(node);
+        updateMinimum(node.left, left, right, val);
+        updateMinimum(node.right, left, right, val);
+    }
+
+    void updateMinimum(int left, int right, T val)
+    {
+        _updateMinimum(this.root, left, right, val);
+    }
+
+    protected void _add(Node node, int left, int right, T val)
+    {
         if (left > node.rightIndex || right < node.leftIndex) return;
         if (left <= node.leftIndex && right >= node.rightIndex)
         {

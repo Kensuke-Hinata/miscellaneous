@@ -1,5 +1,6 @@
 import std.stdio, std.string;
 import std.conv, std.algorithm;
+import std.typecons;
 
 class SegmentTree(T)
 {
@@ -10,6 +11,7 @@ class SegmentTree(T)
         int width;
         T maximum;
         T minimum;
+        T val;
         bool covered;
         long sum;
         long inc;
@@ -20,6 +22,7 @@ class SegmentTree(T)
         {
             this.maximum = T.min;
             this.minimum = T.max;
+            this.val = 0;
             this.sum = this.inc = 0;
             this.covered = false;
             this.leftIndex = leftIndex;
@@ -41,6 +44,7 @@ class SegmentTree(T)
         node = new Node(leftIndex, rightIndex);
         if (leftIndex == rightIndex)
         {
+            node.val = arr[leftIndex];
             node.sum = node.maximum = node.minimum = arr[leftIndex];
             return;
         }
@@ -80,20 +84,20 @@ class SegmentTree(T)
         return _queryMin(this.root, left, right);
     }
 
-    protected void _queryBound(Node node, int left, int right, T[] res)
+    protected void _queryBound(Node node, int left, int right, Tuple!(T, "min", T, "max") res)
     {
         if (left > node.rightIndex || right < node.leftIndex) return;
         if (left <= node.leftIndex && right >= node.rightIndex)
         {
-            res[0] = min(res[0], node.minimum);
-            res[1] = max(res[1], node.maximum);
+            res.min = min(res.min, node.minimum);
+            res.max = max(res.max, node.maximum);
             return;
         }
         _queryBound(node.left, left, right, res);
         _queryBound(node.right, left, right, res);
     }
 
-    void queryBound(int left, int right, T[] res)
+    void queryBound(int left, int right, Tuple!(T, "min", T, "max") res)
     {
         _queryBound(this.root, left, right, res);
     }
@@ -104,6 +108,8 @@ class SegmentTree(T)
         {
             node.covered = false;
             node.left.covered = node.right.covered = true;
+            node.val = 0;
+            node.left.val = node.right.val = val;
             node.left.inc += node.inc;
             node.left.sum += node.inc * node.left.width;
             node.right.inc += node.inc;
@@ -129,42 +135,27 @@ class SegmentTree(T)
         return _querySum(this.root, left, right);
     }
 
-    protected void updateMaximum(Node node, int left, int right, T val)
+    protected void updateValue(Node node, int left, int right, T val)
     {
         if (left > node.rightIndex || right < node.leftIndex) return;
         if (left <= node.leftIndex && right >= node.rightIndex)
         {
             node.covered = true;
+            node.val = val;
             node.maximum = max(node.maximum, val);
-            return;
-        }
-        pushdown(node);
-        updateMaximum(node.left, left, right, val);
-        updateMaximum(node.right, left, right, val);
-    }
-
-    void updateMaximum(int left, int right, T val)
-    {
-        _updateMaximum(this.root, left, right, val);
-    }
-
-    protected void updateMinimum(Node node, int left, int right, T val)
-    {
-        if (left > node.rightIndex || right < node.leftIndex) return;
-        if (left <= node.leftIndex && right >= node.rightIndex)
-        {
-            node.covered = true;
             node.minimum = min(node.minimum, val);
             return;
         }
         pushdown(node);
-        updateMinimum(node.left, left, right, val);
-        updateMinimum(node.right, left, right, val);
+        updateValue(node.left, left, right, val);
+        updateValue(node.right, left, right, val);
+        node.maximum = max(node.left.maximum, node.right.maximum);
+        node.minimum = min(node.left.minimum, node.right.minimum);
     }
 
-    void updateMinimum(int left, int right, T val)
+    void updateValue(int left, int right, T val)
     {
-        _updateMinimum(this.root, left, right, val);
+        _updateValue(this.root, left, right, val);
     }
 
     protected void _add(Node node, int left, int right, T val)

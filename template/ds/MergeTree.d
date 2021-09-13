@@ -2,7 +2,7 @@ import std.stdio, std.string;
 
 class MergeTree(T)
 {
-    class Node
+    protected class Node
     {
         int leftIndex;
         int rightIndex;

@@ -1,5 +1,5 @@
-import std.stdio, std.string, std.conv;
-import std.algorithm;
+import std.stdio, std.string;
+import std.conv, std.algorithm;
 
 class DisjointSet
 {
@@ -31,7 +31,7 @@ class DisjointSet
         parent[pn] = pm;
         if (height[pn] == height[pm]) ++ height[pm];
     }
-};
+}
 
 int main(string[] args)
 {

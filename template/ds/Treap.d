@@ -331,10 +331,7 @@ class Treap(T)
 
     public void clear()
     {
-        while (root)
-        {
-            remove(root.val);
-        }
+        while (root) remove(root.val);
     }
 
     @property public int size()

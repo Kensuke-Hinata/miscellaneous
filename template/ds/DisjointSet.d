@@ -24,12 +24,13 @@ class DisjointSet
         return parent[n];
     }
 
-    void join(int n, int m)
+    int join(int n, int m)
     {
         int pn = find(n), pm = find(m);
         if (height[pn] > height[pm]) swap(pn, pm);
         parent[pn] = pm;
         if (height[pn] == height[pm]) ++ height[pm];
+        return pm;
     }
 }
 

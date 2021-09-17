@@ -11,10 +11,8 @@ class SegmentTree(T)
         int width;
         T maximum;
         T minimum;
-        T val;
         bool covered;
         long sum;
-        long inc;
         Node left;
         Node right;
 
@@ -22,8 +20,7 @@ class SegmentTree(T)
         {
             this.maximum = T.min;
             this.minimum = T.max;
-            this.val = 0;
-            this.sum = this.inc = 0;
+            this.sum = 0;
             this.covered = false;
             this.leftIndex = leftIndex;
             this.rightIndex = rightIndex;
@@ -44,7 +41,6 @@ class SegmentTree(T)
         node = new Node(leftIndex, rightIndex);
         if (leftIndex == rightIndex)
         {
-            node.val = arr[leftIndex];
             node.sum = node.maximum = node.minimum = arr[leftIndex];
             return;
         }
@@ -102,29 +98,10 @@ class SegmentTree(T)
         _queryBound(this.root, left, right, res);
     }
 
-    protected void pushdown(Node node)
-    {
-        if (node.covered)
-        {
-            node.covered = false;
-            node.left.covered = node.right.covered = true;
-            node.val = 0;
-            node.left.val = node.right.val = val;
-            node.left.inc += node.inc;
-            node.left.sum += node.inc * node.left.width;
-            node.right.inc += node.inc;
-            node.right.sum += node.inc * node.right.width;
-            node.inc = 0;
-            node.left.maximum = node.right.maximum = node.maximum;
-            node.left.minimum = node.right.minimum = node.minimum;
-        }
-    }
-
     protected long _querySum(Node node, int left, int right)
     {
         if (left <= node.leftIndex && right >= node.rightIndex) return node.sum;
         if (left > node.rightIndex || right < node.leftIndex) return 0;
-        pushdown(node);
         auto leftSum = _querySum(node.left, left, right);
         auto rightSum = _querySum(node.right, left, right);
         return leftSum + rightSum;
@@ -133,50 +110,6 @@ class SegmentTree(T)
     long querySum(int left, int right)
     {
         return _querySum(this.root, left, right);
-    }
-
-    protected void updateValue(Node node, int left, int right, T val)
-    {
-        if (left > node.rightIndex || right < node.leftIndex) return;
-        if (left <= node.leftIndex && right >= node.rightIndex)
-        {
-            node.covered = true;
-            node.val = val;
-            node.maximum = max(node.maximum, val);
-            node.minimum = min(node.minimum, val);
-            return;
-        }
-        pushdown(node);
-        updateValue(node.left, left, right, val);
-        updateValue(node.right, left, right, val);
-        node.maximum = max(node.left.maximum, node.right.maximum);
-        node.minimum = min(node.left.minimum, node.right.minimum);
-    }
-
-    void updateValue(int left, int right, T val)
-    {
-        _updateValue(this.root, left, right, val);
-    }
-
-    protected void _add(Node node, int left, int right, T val)
-    {
-        if (left > node.rightIndex || right < node.leftIndex) return;
-        if (left <= node.leftIndex && right >= node.rightIndex)
-        {
-            node.covered = true;
-            node.sum += to!long(val) * node.width;
-            node.inc += val;
-            return;
-        }
-        pushdown(node);
-        _add(node.left, left, right, val);
-        _add(node.right, left, right, val);
-        node.sum = node.left.sum + node.right.sum;
-    }
-
-    void add(int left, int right, T val)
-    {
-        _add(this.root, left, right, val);
     }
 }
 

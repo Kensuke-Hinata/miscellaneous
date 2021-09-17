@@ -11,7 +11,6 @@ class SegmentTree(T)
         int width;
         T maximum;
         T minimum;
-        bool covered;
         long sum;
         Node left;
         Node right;
@@ -21,7 +20,6 @@ class SegmentTree(T)
             this.maximum = T.min;
             this.minimum = T.max;
             this.sum = 0;
-            this.covered = false;
             this.leftIndex = leftIndex;
             this.rightIndex = rightIndex;
             this.width = rightIndex - leftIndex + 1;

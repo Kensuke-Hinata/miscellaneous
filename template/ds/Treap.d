@@ -231,6 +231,36 @@ class Treap(T)
         return 1;
     }
 
+    protected int _queryRank(Node node, T val)
+    {
+        if (!node) return 0;
+        if (node.val >= val) return _queryRank(node.left, val);
+        auto res = _queryRank(node.right, val);
+        if (node.left) res += node.left.size;
+        res += node.count;
+        return res;
+    }
+
+    int queryRank(T val)
+    {
+        return _queryRank(this.root, val);
+    }
+
+    protected T _getKthElement(Node node, int k)
+    {
+        if (node.left && node.left.size >= k) return _getKthElement(node.left, k);
+        auto cnt = node.count;
+        if (node.left) cnt += node.left.size;
+        if (cnt >= k) return node.val;
+        return _getKthElement(node.right, k - cnt);
+    }
+
+    T getKthElement(int k)
+    {
+        if (!this.root || k > this.root.size) return T.max;
+        return _getKthElement(this.root, k);
+    }
+
     protected int _countLess(Node node, T val)
     {
         if (!node) return 0;

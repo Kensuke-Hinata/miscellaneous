@@ -1,5 +1,5 @@
 import std.stdio, std.string;
-import std.algorithm;
+import std.conv, std.algorithm;
 
 class RMQ(T)
 {
@@ -8,13 +8,13 @@ class RMQ(T)
 
     protected void init(T[] a)
     {
-        auto n = cast(int)minv.length, m = cast(int)minv[0].length;
-        foreach (i; 0 .. n) maxv[i][0] = minv[i][0] = a[i];
+        auto n = to!int(this.minv.length), m = to!int(this.minv[0].length);
+        foreach (i; 0 .. n) this.maxv[i][0] = this.minv[i][0] = a[i];
         foreach (i; 1 .. m) foreach (j; 0 .. n)
         {
             if (j + (1 << i) >= n) break;
-            minv[j][i] = min(minv[j][i - 1], minv[j + (1 << (i - 1))][i - 1]);
-            maxv[j][i] = max(maxv[j][i - 1], maxv[j + (1 << (i - 1))][i - 1]);
+            this.minv[j][i] = min(this.minv[j][i - 1], this.minv[j + (1 << (i - 1))][i - 1]);
+            this.maxv[j][i] = max(this.maxv[j][i - 1], this.maxv[j + (1 << (i - 1))][i - 1]);
         }
     }
 
@@ -34,8 +34,8 @@ class RMQ(T)
                 len = mid;
             }
         }
-        minv = new T[][](n, len + 1);
-        maxv = new T[][](n, len + 1);
+        this.minv = new T[][](n, len + 1);
+        this.maxv = new T[][](n, len + 1);
         init(a);
     }
 }

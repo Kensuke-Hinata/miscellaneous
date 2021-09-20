@@ -1,4 +1,5 @@
 import std.stdio, std.string;
+import std.conv;
 
 class FenwickTree 
 {
@@ -6,8 +7,8 @@ class FenwickTree
 
     this(long[] a)
     {
-        auto n = cast(int)a.length;
-        sum = new long[n + 1];
+        auto n = to!int(a.length);
+        this.sum = new long[n + 1];
         foreach (i; 1 .. n + 1) add(i, a[i - 1]);
     }
 
@@ -18,19 +19,19 @@ class FenwickTree
 
     void add(int idx, long val)
     {
-        while (idx < sum.length)
+        while (idx < this.sum.length)
         {
-            sum[idx] += val;
+            this.sum[idx] += val;
             idx += lowbit(idx);
         }
     }
 
-    long _query(int idx)
+    protected long _query(int idx)
     {
         long res = 0;
         while (idx > 0)
         {
-            res += sum[idx];
+            res += this.sum[idx];
             idx -= lowbit(idx);
         }
         return res;

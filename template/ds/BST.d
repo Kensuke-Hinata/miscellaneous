@@ -12,8 +12,8 @@ class BST(T)
 
         this()
         {
-            left = right = null;
-            size = 1;
+            this.left = this.right = null;
+            this.size = 1;
         }
 
         int cmpVal(T val)
@@ -30,15 +30,15 @@ class BST(T)
 
     this()
     {
-        root = null;
-        _size = 0;
-        minimal = T.max;
-        maximal = T.min;
+        this.root = null;
+        this._size = 0;
+        this.minimal = T.max;
+        this.maximal = T.min;
     }
 
     protected Node find(T val)
     {
-        return _find(root, val);
+        return _find(this.root, val);
     }
 
     protected Node _find(Node node, T val)
@@ -50,10 +50,10 @@ class BST(T)
         return _find(node.left, val);
     }
 
-    public void insert(T val)
+    void insert(T val)
     {
-        auto ret = _insert(root, val);
-        if (ret) ++ _size;
+        auto ret = _insert(this.root, val);
+        if (ret) ++ this._size;
     }
 
     protected bool _insert(ref Node node, T val)
@@ -80,10 +80,10 @@ class BST(T)
         return res;
     }
 
-    public void remove(T val)
+    void remove(T val)
     {
-        auto ret = _remove(root, val);
-        if (ret) -- _size;
+        auto ret = _remove(this.root, val);
+        if (ret) -- this._size;
     }
 
     protected bool _remove(ref Node node, T val)
@@ -141,9 +141,9 @@ class BST(T)
         return _countLess(node.left, val);
     }
 
-    public int countLess(T val)
+    int countLess(T val)
     {
-        return _countLess(root, val);
+        return _countLess(this.root, val);
     }
 
     protected int _countGreater(Node node, T val)
@@ -164,38 +164,38 @@ class BST(T)
         return _countGreater(node.right, val);
     }
 
-    public int countGreater(T val)
+    int countGreater(T val)
     {
-        return _countGreater(root, val);
+        return _countGreater(this.root, val);
     }
 
     protected T _getMinimal(Node node)
     {
-        if (!node) return minimal; 
+        if (!node) return this.minimal;
         if (!node.left) return node.val;
         return _getMinimal(node.left);
     }
 
-    public T getMinimal()
+    T getMinimal()
     {
-        return _getMinimal(root);
+        return _getMinimal(this.root);
     }
 
     protected T _getMaximal(Node node)
     {
-        if (!node) return maximal;
+        if (!node) return this.maximal;
         if (!node.right) return node.val;
         return _getMaximal(node.right);
     }
 
-    public T getMaximal()
+    T getMaximal()
     {
-        return _getMaximal(root);
+        return _getMaximal(this.root);
     }
 
-    public void travel()
+    void travel()
     {
-        _travel(root);
+        _travel(this.root);
     }
 
     protected void _travel(Node node)
@@ -207,17 +207,14 @@ class BST(T)
         _travel(node.right);
     }
 
-    public void clear()
+    void clear()
     {
-        while (root)
-        {
-            remove(root.val);
-        }
+        while (this.root) remove(this.root.val);
     }
 
-    @property public int size()
+    @property int size()
     {
-        return _size;
+        return this._size;
     }
 }
 

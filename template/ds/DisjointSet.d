@@ -8,28 +8,28 @@ class DisjointSet
 
     this(int n)
     {
-        parent = new int[n];
-        height = new int[n];
+        this.parent = new int[n];
+        this.height = new int[n];
         foreach (i; 0 .. n)
         {
-            parent[i] = i;
-            height[i] = 1;
+            this.parent[i] = i;
+            this.height[i] = 1;
         }
     }
 
     int find(int n)
     {
-        if (parent[n] == n) return n;
-        parent[n] = find(parent[n]);
-        return parent[n];
+        if (this.parent[n] == n) return n;
+        this.parent[n] = find(this.parent[n]);
+        return this.parent[n];
     }
 
     int join(int n, int m)
     {
         int pn = find(n), pm = find(m);
-        if (height[pn] > height[pm]) swap(pn, pm);
-        parent[pn] = pm;
-        if (height[pn] == height[pm]) ++ height[pm];
+        if (this.height[pn] > this.height[pm]) swap(pn, pm);
+        this.parent[pn] = pm;
+        if (this.height[pn] == this.height[pm]) ++ this.height[pm];
         return pm;
     }
 }

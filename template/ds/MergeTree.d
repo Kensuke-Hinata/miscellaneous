@@ -1,4 +1,5 @@
 import std.stdio, std.string;
+import std.conv;
 
 class MergeTree(T)
 {
@@ -22,7 +23,7 @@ class MergeTree(T)
 
     this(T[] arr)
     {
-        this.initializeTree(this.root, arr, 0, cast(int)arr.length - 1);
+        this.initializeTree(this.root, arr, 0, to!int(arr.length) - 1);
     }
 
     protected void initializeTree(ref Node node, T[] arr, int leftIndex, int rightIndex)

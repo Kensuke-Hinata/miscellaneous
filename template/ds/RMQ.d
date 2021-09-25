@@ -6,10 +6,10 @@ class RMQ(T)
     protected T[][] minv;
     protected T[][] maxv;
 
-    protected void init(T[] a)
+    protected void init(T[] arr)
     {
         auto n = to!int(this.minv.length), m = to!int(this.minv[0].length);
-        foreach (i; 0 .. n) this.maxv[i][0] = this.minv[i][0] = a[i];
+        foreach (i; 0 .. n) this.maxv[i][0] = this.minv[i][0] = arr[i];
         foreach (i; 1 .. m) foreach (j; 0 .. n)
         {
             if (j + (1 << i) >= n) break;
@@ -18,7 +18,7 @@ class RMQ(T)
         }
     }
 
-    this(int n, T[] a)
+    this(int n, T[] arr)
     {
         auto left = 0, right = 20, len = -1;
         while (left <= right)
@@ -36,7 +36,7 @@ class RMQ(T)
         }
         this.minv = new T[][](n, len + 1);
         this.maxv = new T[][](n, len + 1);
-        init(a);
+        init(arr);
     }
 }
 

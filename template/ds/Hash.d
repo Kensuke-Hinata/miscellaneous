@@ -1,4 +1,5 @@
-import std.stdio, std.string, std.conv;
+import std.stdio, std.string;
+import std.conv;
 
 class Hash
 {
@@ -9,20 +10,28 @@ class Hash
 
     this(int n)
     {
-        len = n << 3;
-        h = new int[][len];   // list for the same value v
-        f = new bool[len];    // occupation flag
-        v = new long[len];    // value
+        this.len = n << 3;
+        this.h = new int[][this.len];   // list for the same value v
+        this.f = new bool[this.len];    // occupation flag
+        this.v = new long[this.len];    // value
     }
 
-    int getPosition(long n)
+    protected int calc(string s)
+    {
+        long hash = 0;
+        foreach (i, val; s) hash = (hash << 4) ^ (hash >> 28) ^ val;
+        auto res = hash % this.len;
+        return res;
+    }
+
+    protected int getPosition(long n)
     {
         auto s = to!string(n);
         int pos = calc(s);
-        while (f[pos] == true && v[pos] != n)
+        while (this.f[pos] == true && this.v[pos] != n)
         {
             ++ pos;
-            if (pos == len) pos = 0;
+            if (pos == this.len) pos = 0;
         }
         return pos;
     }
@@ -30,22 +39,15 @@ class Hash
     void insert(long n, int idx)
     {
         auto pos = getPosition(n);
-        v[pos] = n;
-        f[pos] = true;
-        h[pos] ~= idx;
+        this.v[pos] = n;
+        this.f[pos] = true;
+        this.h[pos] ~= idx;
     }
 
     int[] find(long n)
     {
         auto pos = getPosition(n);
-        return h[pos];
-    }
-
-    int calc(string s)
-    {
-        long hash = 0;
-        foreach (i, val; s) hash = (hash << 4) ^ (hash >> 28) ^ val;
-        return (hash % len);
+        return this.h[pos];
     }
 };
 

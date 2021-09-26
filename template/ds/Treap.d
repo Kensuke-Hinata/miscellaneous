@@ -15,8 +15,8 @@ class Treap(T)
 
         this()
         {
-            left = right = null;
-            size = count = distinct = 1;
+            this.left = this.right = null;
+            this.size = this.count = this.distinct = 1;
         }
 
         int cmpPriority(long priority)
@@ -39,10 +39,10 @@ class Treap(T)
 
     this()
     {
-        root = null;
-        rnd = Xorshift(1234567891);
-        minimal = T.max;
-        maximal = T.min;
+        this.root = null;
+        this.rnd = Xorshift(1234567891);
+        this.minimal = T.max;
+        this.maximal = T.min;
     }
 
     protected void leftRotate(ref Node node)
@@ -107,7 +107,7 @@ class Treap(T)
 
     protected Node find(T val)
     {
-        return _find(root, val);
+        return _find(this.root, val);
     }
 
     protected Node _find(Node node, T val)
@@ -119,9 +119,9 @@ class Treap(T)
         return _find(node.left, val);
     }
 
-    public void insert(T val)
+    void insert(T val)
     {
-        _insert(root, val);
+        _insert(this.root, val);
     }
 
     protected int _insert(ref Node node, T val)
@@ -171,9 +171,9 @@ class Treap(T)
         return res;
     }
 
-    public void remove(T val)
+    int remove(T val)
     {
-        _remove(root, val);
+        return _remove(this.root, val);
     }
 
     protected int _remove(ref Node node, T val)
@@ -305,9 +305,9 @@ class Treap(T)
         return _countLess(node.left, val);
     }
 
-    public int countLess(T val)
+    int countLess(T val)
     {
-        return _countLess(root, val);
+        return _countLess(this.root, val);
     }
 
     protected int _countGreater(Node node, T val)
@@ -328,9 +328,9 @@ class Treap(T)
         return _countGreater(node.right, val);
     }
 
-    public int countGreater(T val)
+    int countGreater(T val)
     {
-        return _countGreater(root, val);
+        return _countGreater(this.root, val);
     }
 
     protected int _countEqual(Node node, T val)
@@ -341,38 +341,38 @@ class Treap(T)
         return _countEqual(node.right, val);
     }
 
-    public int countEqual(T val)
+    int countEqual(T val)
     {
-        return _countEqual(root, val);
+        return _countEqual(this.root, val);
     }
 
     protected T _getMinimal(Node node)
     {
-        if (!node) return minimal; 
+        if (!node) return this.minimal;
         if (!node.left) return node.val;
         return _getMinimal(node.left);
     }
 
-    public T getMinimal()
+    T getMinimal()
     {
-        return _getMinimal(root);
+        return _getMinimal(this.root);
     }
 
     protected T _getMaximal(Node node)
     {
-        if (!node) return maximal;
+        if (!node) return this.maximal;
         if (!node.right) return node.val;
         return _getMaximal(node.right);
     }
 
-    public T getMaximal()
+    T getMaximal()
     {
-        return _getMaximal(root);
+        return _getMaximal(this.root);
     }
 
-    public void travel()
+    void travel()
     {
-        _travel(root);
+        _travel(this.root);
     }
 
     protected void _travel(Node node)
@@ -385,19 +385,19 @@ class Treap(T)
         _travel(node.right);
     }
 
-    public void clear()
+    void clear()
     {
-        while (root) remove(root.val);
+        while (this.root) remove(this.root.val);
     }
 
-    @property public int size()
+    @property int size()
     {
-        return root.size;
+        return (this.root is null) ? 0 : this.root.size;
     }
 
-    @property public int distinct()
+    @property int distinct()
     {
-        return root.distinct;
+        return (this.root is null) ? 0 : this.root.distinct;
     }
 }
 

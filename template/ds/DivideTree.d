@@ -86,45 +86,6 @@ class DivideTree(T)
     }
 }
 
-unittest
-{
-    auto arr = [1, 5, 2, 6, 3, 7, 4];
-    auto dt = new DivideTree!int(arr);
-    writeln(dt.getKthElement(1, 4, 3));
-    writeln(dt.getKthElement(3, 3, 1));
-    writeln(dt.getKthElement(0, 6, 3));
-    writeln(dt.getKthElement(0, 4, 3));
-    writeln(dt.getKthElement(1, 6, 1));
-    writeln(dt.getKthElement(1, 3, 2));
-    writeln(dt.getKthElement(1, 3, 3));
-    writeln;
-
-    arr = [8, 1, 5, 2, 6, 3, 7, 4];
-    dt = new DivideTree!int(arr);
-    writeln(dt.getKthElement(1, 4, 3));
-    writeln(dt.getKthElement(3, 3, 1));
-    writeln(dt.getKthElement(0, 6, 3));
-    writeln(dt.getKthElement(0, 4, 3));
-    writeln(dt.getKthElement(1, 6, 1));
-    writeln(dt.getKthElement(1, 3, 2));
-    writeln(dt.getKthElement(1, 3, 3));
-    writeln;
-
-    arr = [8, 1];
-    dt = new DivideTree!int(arr);
-    writeln(dt.getKthElement(0, 1, 1));
-    writeln(dt.getKthElement(0, 1, 2));
-    writeln;
-
-    arr = [8, 1, 8, 1];
-    dt = new DivideTree!int(arr);
-    writeln(dt.getKthElement(0, 3, 1));
-    writeln(dt.getKthElement(0, 3, 2));
-    writeln(dt.getKthElement(0, 3, 3));
-    writeln(dt.getKthElement(0, 3, 4));
-    writeln;
-}
-
 int main(string[] args)
 {
     return 0;

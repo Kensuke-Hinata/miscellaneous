@@ -123,6 +123,32 @@ class BST(T)
         return true;
     }
 
+    protected T _getNext(Node node, T val)
+    {
+        if (!node) return T.max;
+        if (node.val <= val) return _getNext(node.right, val);
+        auto ret = _getNext(node.left, val);
+        return min(ret, node.val);
+    }
+
+    T getNext(T val)
+    {
+        return _getNext(this.root, val);
+    }
+
+    protected T _getPrev(Node node, T val)
+    {
+        if (!node) return T.min;
+        if (node.val >= val) return _getPrev(node.left, val);
+        auto ret = _getPrev(node.right, val);
+        return max(ret, node.val);
+    }
+
+    T getPrev(T val)
+    {
+        return _getPrev(this.root, val);
+    }
+
     protected int _countLess(Node node, T val)
     {
         if (!node) return 0;

@@ -2,6 +2,8 @@
 
 using namespace std;
 
+typedef long long LL;
+
 class Node {
     public:
         int val;
@@ -106,7 +108,7 @@ class LeftistTree {
         }
 };
 
-LeftistTree* dfs(int node, vector<vector<int>>& t, vector<int>& cnt, long& res, int d) {
+LeftistTree* dfs(int node, vector<vector<int>>& t, vector<int>& cnt, LL& res, int d) {
     auto lt = new LeftistTree();
     lt->insert(node);
     for (int i = 0; i < t[node].size(); ++ i) {
@@ -121,12 +123,12 @@ LeftistTree* dfs(int node, vector<vector<int>>& t, vector<int>& cnt, long& res, 
     return lt;
 }
 
-long solve(int n, int m, vector<int>& p, vector<int>& c) {
+LL solve(int n, int m, vector<int>& p, vector<int>& c) {
     vector<vector<int>> t(n);
     for (int i = 0; i < p.size(); ++ i) t[p[i]].push_back(i + 1);
     vector<int> cnt(n);
     for (int i = 0; i < c.size(); ++ i) ++ cnt[c[i]];
-    long res = 0;
+    LL res = 0;
     dfs(0, t, cnt, res, 0);
     return res;
 }
@@ -140,9 +142,9 @@ int main(int argc, char** argv) {
         vector<int> P(N - 1);
         for (int j = 0; j < N - 1; ++ j) scanf("%d", &P[j]);
         vector<int> C(M);
-        for (int j = 0; j < M; ++ j) C[j] = ((long)A * j + B) % N;
+        for (int j = 0; j < M; ++ j) C[j] = ((LL)A * j + B) % N;
         auto ret = solve(N, M, P, C);
-        printf("Case #%d: %ld\n", i, ret);
+        printf("Case #%d: %lld\n", i, ret);
     }
     return 0;
 }

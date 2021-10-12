@@ -11,7 +11,6 @@ using namespace std;
 #define CLR(v) ((v).clear())
 #define ALL(v) (v).begin(), (v).end()
 #define ZERO(v) memset(v, 0, sizeof(v))
-#define REP(i, n) for (int i = 0; i < n; ++ i)
 
 typedef long long LL;
 typedef pair<int, int> pii;

@@ -12,14 +12,17 @@ using namespace std;
 #define ALL(v) (v).begin(), (v).end()
 #define ZERO(v) memset(v, 0, sizeof(v))
 
-typedef long long ll;
+typedef long long LL;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
-typedef vector<ll> vll;
+typedef vector<LL> vll;
+typedef vector<double> vd;
+typedef vector<string> vs;
+typedef vector<bool> vb;
 
 #define MAIN
 #ifdef MAIN
 int main() {
     return 0;
 }
-#endif  
+#endif

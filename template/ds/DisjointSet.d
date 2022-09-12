@@ -26,7 +26,7 @@ class DisjointSet
 
     int join(int n, int m)
     {
-        int pn = find(n), pm = find(m);
+        auto pn = find(n), pm = find(m);
         if (this.height[pn] > this.height[pm]) swap(pn, pm);
         this.parent[pn] = pm;
         if (this.height[pn] == this.height[pm]) ++ this.height[pm];

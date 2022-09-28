@@ -74,6 +74,17 @@ struct SegmentTree {
         for (int i = 0; i < k && i < n; ++ i) s += res[n - i - 1];
         return s >= x;
     }
+
+    void _clear(Node* node) {
+        if (!node) return;
+        _clear(node->lnode);
+        _clear(node->rnode);
+        delete node;
+    }
+
+    void clear() {
+        _clear(root);
+    }
 };
 
 int main(int argc, char** argv) {
@@ -91,6 +102,7 @@ int main(int argc, char** argv) {
             if (ret) cout << "Y" << endl;
             else cout << "N" << endl;
         }
+        st.clear();
     }
     return 0;
 }

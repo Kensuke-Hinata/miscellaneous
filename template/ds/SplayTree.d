@@ -218,9 +218,10 @@ class SplayTree(T)
         auto ret = node.cmpVal(val);
         if (ret == 0)
         {
+            auto tnode = node;
             splay(node);
-            ++ node.count;
-            ++ node.size;
+            ++ tnode.count;
+            ++ tnode.size;
             return;
         }
         if (ret == 1) _insert(node.left, node, val);

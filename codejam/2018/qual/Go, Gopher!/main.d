@@ -5,8 +5,7 @@ import std.math, std.algorithm;
 
 bool inside(int x, int y, int n, int m)
 {
-    if (x > 0 && x <= n && y > 0 && y <= m) return true;
-    return false;
+    return x > 0 && x <= n && y > 0 && y <= m;
 }
 
 void solve(int a)

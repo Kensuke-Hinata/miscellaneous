@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <cstring>
 
-typedef __int64 ll;
+typedef long long ll;
 
 char s[2001];
 int dp[2000];
@@ -58,7 +58,7 @@ void func()
             dp[i] ++;
         }
     }
-    printf("%I64d\n", ans);
+    printf("%lld\n", ans);
 }
 
 int main()

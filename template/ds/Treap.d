@@ -1,5 +1,7 @@
 import std.stdio, std.string;
-import std.random, std.algorithm;
+import std.conv, std.array;
+import std.math, std.algorithm;
+import std.typecons, std.random;
 
 class Treap(T)
 {
@@ -300,7 +302,7 @@ class Treap(T)
         if (node.val < val)
         {
             auto res = _countLess(node.right, val);
-            ++ res;
+            res += node.count;
             if (node.left) res += node.left.size;
             return res;
         }
@@ -323,7 +325,7 @@ class Treap(T)
         if (node.val > val)
         {
             auto res = _countGreater(node.left, val);
-            ++ res;
+            res += node.count;
             if (node.right) res += node.right.size;
             return res;
         }

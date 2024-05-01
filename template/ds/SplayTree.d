@@ -334,7 +334,7 @@ class SplayTree(T)
         if (node.val < val)
         {
             auto res = _countLess(node.right, val);
-            ++ res;
+            res += node.count;
             if (node.left) res += node.left.size;
             return res;
         }
@@ -359,7 +359,7 @@ class SplayTree(T)
         if (node.val > val)
         {
             auto res = _countGreater(node.left, val);
-            ++ res;
+            res += node.count;
             if (node.right) res += node.right.size;
             return res;
         }

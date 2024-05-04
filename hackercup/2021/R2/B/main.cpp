@@ -254,7 +254,7 @@ struct Treap {
         }
         if (node->val < val) {
             auto res = _count_less(node->right, val);
-            ++ res;
+            res += node->count;
             if (node->left) res += node->left->size;
             return res;
         }
@@ -273,7 +273,7 @@ struct Treap {
         }
         if (node->val > val) {
             auto res = _count_greater(node->left, val);
-            ++ res;
+            res += node->count;
             if (node->right) res += node->right->size;
             return res;
         }

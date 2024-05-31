@@ -1,7 +1,7 @@
 import std.stdio, std.string;
 import std.conv, std.algorithm;
 
-class DisjointSet
+class DSU
 {
     protected int[] parent;
     protected int[] height;

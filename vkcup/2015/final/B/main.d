@@ -17,10 +17,7 @@ int solve(int[] a)
     {
         auto idx = p[i];
         dp[idx] = 1;
-        for (int j = i << 1; j <= m; j += i) if (p[j] != -1)
-        {
-            dp[idx] = max(dp[idx], dp[p[j]] + 1);
-        }
+        for (int j = i << 1; j <= m; j += i) if (p[j] != -1) dp[idx] = max(dp[idx], dp[p[j]] + 1);
         res = max(res, dp[idx]);
     }
     return res;
